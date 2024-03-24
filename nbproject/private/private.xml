@@ -2,6 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/Users/LENOVO/Documents/NetBeansProjects/java-inv-helpdesk/src/dao/CustomerDAO.java</file>
+            <file>file:/D:/Users/LENOVO/Documents/NetBeansProjects/java-inv-helpdesk/src/controller/BrandController.java</file>
+            <file>file:/D:/Users/LENOVO/Documents/NetBeansProjects/java-inv-helpdesk/src/view/Frame_CreateCustomer.java</file>
+            <file>file:/D:/Users/LENOVO/Documents/NetBeansProjects/java-inv-helpdesk/src/controller/CustomerController.java</file>
+            <file>file:/D:/Users/LENOVO/Documents/NetBeansProjects/java-inv-helpdesk/src/dao/BrandDAO.java</file>
+            <file>file:/D:/Users/LENOVO/Documents/NetBeansProjects/java-inv-helpdesk/src/view/form/Form_Customers.java</file>
+        </group>
     </open-files>
 </project-private>

@@ -1,6 +1,7 @@
 package view.main;
 
 import controller.BrandController;
+import controller.CustomerController;
 import controller.UserController;
 import java.awt.Component;
 import model.UserModel;
@@ -9,6 +10,7 @@ import view.form.Form_Dashboard;
 import view.form.Form_Empty;
 import view.form.Form_Users;
 import view.menu.EventMenuSelected;
+import view.form.Form_Customers;
 
 public class Home extends javax.swing.JFrame {
     
@@ -23,6 +25,10 @@ public class Home extends javax.swing.JFrame {
     BrandController brandController;
     Form_Brands formBrands;
     
+//    Form Customers
+    CustomerController customerController;
+    Form_Customers formCustomers;
+       
     public Home(UserModel userLogin) {
         this.userLogin = userLogin;
         
@@ -35,6 +41,11 @@ public class Home extends javax.swing.JFrame {
         formBrands = new Form_Brands(userLogin);
         brandController = new BrandController(formBrands, this);
         brandController.showBrands();
+
+//        Form Customers
+        formCustomers = new Form_Customers(userLogin);
+        customerController = new CustomerController(formCustomers, this);
+        customerController.showCustomers();
 
         initComponents();
         init();
@@ -53,6 +64,8 @@ public class Home extends javax.swing.JFrame {
                     showForm(formUsers);
                 } else if(index == 2 && indexSubMenu == 1) {
                     showForm(formBrands);
+                } else if(index == 3 && indexSubMenu == 0) {
+                    showForm(formCustomers);
                 }
                 else {
                     showForm(new Form_Empty(index + " " + indexSubMenu));
