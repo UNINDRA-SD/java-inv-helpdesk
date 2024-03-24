@@ -21,7 +21,7 @@ public class MysqlDB {
             MysqlDataSource dataSource = new MysqlDataSource();
             dataSource.setServerName("localhost");
             dataSource.setPortNumber(3306);
-            dataSource.setDatabaseName("inv");
+            dataSource.setDatabaseName("java");
             dataSource.setUser("root");
             dataSource.setPassword("");
             
