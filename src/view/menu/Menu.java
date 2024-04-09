@@ -50,6 +50,7 @@ public class Menu extends JPanel {
 //        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.INSERT_EMOTICON, "Icons", "Feather Icons", "Flag Icons", "Mdi Icons"));
         addTitle("WAREHOUSE");
         addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.ROUTER, "Assets"));
+        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.SHOPPING_BASKET, "Delivery Orders"));
 //        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.INBOX, "Special Pages", "Blank page", "Faq", "Invoice", "Profile", "Pricing", "Timeline"));
 //        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.LOCK_OUTLINE, "Authentication", "Login", "Register"));
 //        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.ERROR_OUTLINE, "Error", "404", "500"));

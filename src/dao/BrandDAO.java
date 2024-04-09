@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import model.BrandModel;
-import model.UserModel;
 import view.main.Home;
 
 /**

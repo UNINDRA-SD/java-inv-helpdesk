@@ -65,6 +65,7 @@ public class UserController {
                 && !createUserView.getjTextPassword().getText().trim().isEmpty()){
             
             UserModel user = new UserModel();
+            
             user.setId(Integer.parseInt(createUserView.getjLabelId().getText()));
             user.setEmail(createUserView.getjTextEmail().getText());
             user.setName(createUserView.getjTextName().getText());
@@ -74,7 +75,7 @@ public class UserController {
             if(userDAO.updateUser(user)) {
                 JOptionPane.showMessageDialog(createUserView, "Data updated successfully!","SUCCESS",JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(createUserView, "Failed to Save Data!","ERROR",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(createUserView, "Failed to update data!","ERROR",JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(createUserView, "Input cannot be empty!","WARNING",JOptionPane.WARNING_MESSAGE);

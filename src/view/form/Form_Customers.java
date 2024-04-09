@@ -73,6 +73,10 @@ public class Form_Customers extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(jTableCustomers);
+        if (jTableCustomers.getColumnModel().getColumnCount() > 0) {
+            jTableCustomers.getColumnModel().getColumn(0).setMinWidth(25);
+            jTableCustomers.getColumnModel().getColumn(0).setMaxWidth(25);
+        }
 
         javax.swing.GroupLayout roundPanel1Layout = new javax.swing.GroupLayout(roundPanel1);
         roundPanel1.setLayout(roundPanel1Layout);
