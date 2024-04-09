@@ -1,5 +1,6 @@
 package view.main;
 
+import controller.AssetController;
 import controller.BrandController;
 import controller.CategoryController;
 import controller.CustomerController;
@@ -7,6 +8,7 @@ import controller.RackController;
 import controller.UserController;
 import java.awt.Component;
 import model.UserModel;
+import view.form.Form_Assets;
 import view.form.Form_Brands;
 import view.form.Form_Dashboard;
 import view.form.Form_Empty;
@@ -21,25 +23,29 @@ public class Home extends javax.swing.JFrame {
     private static Home main;
     private UserModel userLogin;
     
-//    Form Users
+//  Form Users
     UserController userController;
     Form_Users formUsers;
     
-//    Form Brands
+//  Form Brands
     BrandController brandController;
     Form_Brands formBrands;
     
-//      Form Categories
+//  Form Categories
     CategoryController categoryController;
     Form_Categories formCategories;
     
-    //      Form Racks
+//  Form Racks
     RackController rackController;
     Form_Racks formRacks;
     
-//    Form Customers
+//  Form Customers
     CustomerController customerController;
     Form_Customers formCustomers;
+    
+//  Form Assets
+    AssetController assetController;
+    Form_Assets formAssets;
        
     public Home(UserModel userLogin) {
         this.userLogin = userLogin;
@@ -54,12 +60,12 @@ public class Home extends javax.swing.JFrame {
         brandController = new BrandController(formBrands, this);
         brandController.showBrands();
         
-        //        Form Categories
+//        Form Categories
         formCategories = new Form_Categories(userLogin);
         categoryController = new CategoryController(formCategories, this);
         categoryController.showCategories();
         
-        //        Form Racks
+//        Form Racks
         formRacks = new Form_Racks(userLogin);
         rackController = new RackController(formRacks, this);
         rackController.showRacks();
@@ -68,6 +74,11 @@ public class Home extends javax.swing.JFrame {
         formCustomers = new Form_Customers(userLogin);
         customerController = new CustomerController(formCustomers, this);
         customerController.showCustomers();
+
+//        Form Assets
+        formAssets = new Form_Assets(userLogin);
+        assetController = new AssetController(formAssets, this);
+        assetController.showAssets();
 
         initComponents();
         init();
@@ -92,6 +103,8 @@ public class Home extends javax.swing.JFrame {
                     showForm(formRacks);    
                 } else if(index == 3 && indexSubMenu == 0) {
                     showForm(formCustomers);
+                } else if(index == 5 && indexSubMenu == 0) {
+                    showForm(formAssets);
                 }
                 else {
                     showForm(new Form_Empty(index + " " + indexSubMenu));

@@ -1,12 +1,10 @@
 package view.form;
 
 import controller.CategoryController;
-import controller.UserController;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import model.UserModel;
 import view.Frame_CreateCategory;
-import view.Frame_CreateUser;
 import view.main.Home;
 
 

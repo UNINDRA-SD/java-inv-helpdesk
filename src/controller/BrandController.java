@@ -8,10 +8,8 @@ import dao.BrandDAO;
 import java.util.List;
 import javax.swing.JOptionPane;
 import model.BrandModel;
-import model.UserModel;
 import table.BrandTable;
 import view.Frame_CreateBrand;
-import view.Frame_CreateUser;
 import view.form.Form_Brands;
 import view.main.Home;
 

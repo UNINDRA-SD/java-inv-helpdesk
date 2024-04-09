@@ -1,12 +1,10 @@
 package view.form;
 
 import controller.BrandController;
-import controller.UserController;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import model.UserModel;
 import view.Frame_CreateBrand;
-import view.Frame_CreateUser;
 import view.main.Home;
 
 

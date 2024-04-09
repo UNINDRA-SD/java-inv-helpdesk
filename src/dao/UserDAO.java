@@ -92,7 +92,7 @@ public class UserDAO {
         String password = get_SHA_512_SecurePassword(requestUser.getPassword(),"aplikasi");
         String role = requestUser.getRole();
         int id = requestUser.getId();
-        boolean isSuccess = false;
+        boolean isSuccess;
         
         try{
             String query = "UPDATE users SET email=?, name=?, password=?, role=? WHERE id=?";

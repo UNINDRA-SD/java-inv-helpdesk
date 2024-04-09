@@ -13,7 +13,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import model.BrandModel;
 import model.CustomerModel;
 import view.main.Home;
 
