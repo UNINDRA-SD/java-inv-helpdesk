@@ -5,6 +5,7 @@ import controller.BrandController;
 import controller.CategoryController;
 import controller.CustomerController;
 import controller.RackController;
+import controller.TicketController;
 import controller.UserController;
 import java.awt.Component;
 import model.UserModel;
@@ -17,6 +18,7 @@ import view.menu.EventMenuSelected;
 import view.form.Form_Customers;
 import view.form.Form_Categories;
 import view.form.Form_Racks;
+import view.form.Form_Tickets;
 
 public class Home extends javax.swing.JFrame {
     
@@ -42,6 +44,10 @@ public class Home extends javax.swing.JFrame {
 //  Form Customers
     CustomerController customerController;
     Form_Customers formCustomers;
+
+//  Form Tickets
+    TicketController ticketController;
+    Form_Tickets formTickets;
     
 //  Form Assets
     AssetController assetController;
@@ -75,6 +81,11 @@ public class Home extends javax.swing.JFrame {
         customerController = new CustomerController(formCustomers, this);
         customerController.showCustomers();
 
+        //Form Customers
+        formTickets = new Form_Tickets(userLogin);
+        ticketController = new TicketController(formTickets, this);
+        ticketController.showTickets();
+        
 //        Form Assets
         formAssets = new Form_Assets(userLogin);
         assetController = new AssetController(formAssets, this);
@@ -103,6 +114,8 @@ public class Home extends javax.swing.JFrame {
                     showForm(formRacks);    
                 } else if(index == 3 && indexSubMenu == 0) {
                     showForm(formCustomers);
+                } else if(index == 4 && indexSubMenu == 0) {
+                    showForm(formTickets);
                 } else if(index == 5 && indexSubMenu == 0) {
                     showForm(formAssets);
                 }
