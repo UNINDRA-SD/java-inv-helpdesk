@@ -7,7 +7,6 @@ package controller;
 import dao.TicketDAO;
 import java.util.List;
 import javax.swing.JOptionPane;
-import model.AssetModel;
 import model.TicketModel;
 import table.TicketTable;
 import view.Frame_CreateTicket;
@@ -39,6 +38,7 @@ public class TicketController {
     
     public void saveTicket(Frame_CreateTicket createTicketView) {
         if (createTicketView.getjComboCustomer().getSelectedItem() != null
+            && createTicketView.getjComboEngineer().getSelectedItem() != null
             && createTicketView.getjComboStatus().getSelectedItem() != null
             && !createTicketView.getjTextProblem().getText().trim().isEmpty()
             && !createTicketView.getjTextDescription().getText().trim().isEmpty()){
@@ -47,6 +47,8 @@ public class TicketController {
             
             String selectedCustomer = (String) createTicketView.getjComboCustomer().getSelectedItem();
             ticket.setCustomerId(ticket.getCustomerIdByName(selectedCustomer));
+            String selectedEngineer = (String) createTicketView.getjComboEngineer().getSelectedItem();
+            ticket.setUserId(ticket.getUserEngineerIdByName(selectedEngineer));
             String selectedStatus = (String) createTicketView.getjComboStatus().getSelectedItem();
             ticket.setStatus(selectedStatus);
             ticket.setProblem(createTicketView.getjTextProblem().getText());
@@ -72,11 +74,12 @@ public class TicketController {
             ticket.setId(Integer.parseInt(createTicketView.getjLabelId().getText()));
             String selectedCustomer = (String) createTicketView.getjComboCustomer().getSelectedItem();
             ticket.setCustomerId(ticket.getCustomerIdByName(selectedCustomer));
+            String selectedEngineer = (String) createTicketView.getjComboEngineer().getSelectedItem();
+            ticket.setUserId(ticket.getUserEngineerIdByName(selectedEngineer));
             String selectedStatus = (String) createTicketView.getjComboStatus().getSelectedItem();
             ticket.setStatus(selectedStatus);
             ticket.setProblem(createTicketView.getjTextProblem().getText());
             ticket.setDescription(createTicketView.getjTextDescription().getText());
-            System.out.println("ticket : " + ticket.getId() + "| customer : " + ticket.getCustomerId() + "| status : " + ticket.getStatus() + "probelm : " + ticket.getProblem());
             if(ticketDAO.updateTicket(ticket)) {
                 JOptionPane.showMessageDialog(createTicketView, "Data saved successfully!","SUCCESS",JOptionPane.INFORMATION_MESSAGE);
             } else {

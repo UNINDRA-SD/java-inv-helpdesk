@@ -17,9 +17,12 @@ import java.sql.SQLException;
 public class TicketModel {
     private int id;
     private int customerId;
+    private int userId;
     private String status;
     private String problem;
     private String description;
+    
+    Connection sql = MysqlDB.connection();
 
     /**
      * @return the id
@@ -42,8 +45,7 @@ public class TicketModel {
         return customerId;
     }
     
-     public String getCustomerNameById(int customerId) {
-        Connection sql = MysqlDB.connection();
+    public String getCustomerNameById(int customerId) {
         String customerName = null;
 
         try {
@@ -66,7 +68,6 @@ public class TicketModel {
     }
      
       public int getCustomerIdByName(String customerName) {
-        Connection sql = MysqlDB.connection();
         int customer = 0;
 
         try {
@@ -93,6 +94,64 @@ public class TicketModel {
      */
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
+    }
+    
+    /**
+     * @return the userId
+     */
+    public int getUserId() {
+        return userId;
+    }
+
+    /**
+     * @param userId the userId to set
+     */
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+    
+    public String getUserEngineerNameById(int userId) {
+        String userName = null;
+
+        try {
+            String query = "SELECT name FROM users WHERE id=?";
+            PreparedStatement stmt = sql.prepareStatement(query);
+
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                userName = rs.getString("name");
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException err) {
+            System.out.println(err);
+        }
+        return userName;
+    }
+     
+      public int getUserEngineerIdByName(String userName) {
+        int user = 0;
+
+        try {
+            String query = "SELECT id FROM users WHERE name=?";
+            PreparedStatement stmt = sql.prepareStatement(query);
+
+            stmt.setString(1, userName);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                user = rs.getInt("id");
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException err) {
+            System.out.println(err);
+        }
+        return user;
     }
 
     /**
@@ -138,7 +197,6 @@ public class TicketModel {
     }
     
  public String getBrandNameById(int brandId) {
-        Connection sql = MysqlDB.connection();
         String brandName = null;
 
         try {

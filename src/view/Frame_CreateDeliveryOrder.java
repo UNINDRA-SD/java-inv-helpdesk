@@ -4,70 +4,70 @@
  */
 package view;
 
-import controller.TicketController;
-import dao.CustomerDAO;
+import controller.DeliveryOrderController;
+import dao.TicketDAO;
 import dao.UserDAO;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import model.CustomerModel;
+import model.TicketModel;
 import model.UserModel;
-import view.form.Form_Tickets;
+import view.form.Form_DeliveryOrders;
 import view.main.Home;
 
 /**
  *
  * @author dandy
  */
-public class Frame_CreateTicket extends javax.swing.JFrame {
+public class Frame_CreateDeliveryOrder extends javax.swing.JFrame {
 
     
-    Form_Tickets formTickets;
+    Form_DeliveryOrders formDeliveryOrders;
     Home home;
     
-    //Load Customer List ComboBox
-    CustomerDAO customerDAO;
-    List<CustomerModel> customers;
+    //Load Ticket List ComboBox
+    TicketDAO ticketDAO;
+    List<TicketModel> tickets;
     
-    //Load User List ComboBox
+    //Load User Team WH List ComboBox
     UserDAO userDAO;
     List<UserModel> users;
     
     /**
      * Creates new form JFCreateUser
      */
-    public Frame_CreateTicket(Form_Tickets formTickets, Home home) {
-        this.formTickets = formTickets;
+    public Frame_CreateDeliveryOrder(Form_DeliveryOrders formDeliveryOrders, Home home) {
+        this.formDeliveryOrders = formDeliveryOrders;
         this.home = home;
         initComponents();
         
-        //Load Customer List ComboBox
-        customerDAO = new CustomerDAO(home);
-        customers = customerDAO.getCustomers();
-        if (customers != null && !customers.isEmpty()) {
+        //Load Ticket List ComboBox
+        ticketDAO = new TicketDAO(home);
+        tickets = ticketDAO.getTickets();
+        if (tickets != null && !tickets.isEmpty()) {
             DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
-            for (CustomerModel customer : customers) {
-                comboBoxModel.addElement(customer.getName());
+            for (TicketModel ticket : tickets) {
+                comboBoxModel.addElement(String.valueOf(ticket.getId()));
             }
-            jComboCustomer.setModel(comboBoxModel);
+            jComboTicketId.setModel(comboBoxModel);
         } else {
-            jComboCustomer.setEnabled(false);
-            JOptionPane.showMessageDialog(this, "Tidak ada customer yang tersedia.", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+            jComboTicketId.setEnabled(false);
+            JOptionPane.showMessageDialog(this, "Tidak ada ticket yang tersedia.", "Informasi", JOptionPane.INFORMATION_MESSAGE);
         }
         
-        //Load User Engineer List ComboBox
+        //Load User Team WH List ComboBox
         userDAO = new UserDAO(home);
-        users = userDAO.getEngineers();
+        users = userDAO.getWarehouses();
         if (users != null && !users.isEmpty()) {
             DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
             for (UserModel user : users) {
                 comboBoxModel.addElement(user.getName());
             }
-            jComboEngineer.setModel(comboBoxModel);
+            jComboTeamWH.setModel(comboBoxModel);
         } else {
-            jComboEngineer.setEnabled(false);
-            JOptionPane.showMessageDialog(this, "Tidak ada user engineer yang tersedia.", "Informasi", JOptionPane.INFORMATION_MESSAGE);
-        }  
+            jComboTeamWH.setEnabled(false);
+            JOptionPane.showMessageDialog(this, "Tidak ada user team WH yang tersedia.", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+        }
         
         jLabelId.setVisible(false);
     }
@@ -84,17 +84,13 @@ public class Frame_CreateTicket extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jLabelTitle = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jTextProblem = new javax.swing.JTextField();
-        jLabelDescription = new javax.swing.JLabel();
+        jLabelNotes = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextDescription = new javax.swing.JTextArea();
-        jLabelCustomer = new javax.swing.JLabel();
-        jComboCustomer = new javax.swing.JComboBox<>();
-        jLabelStatus = new javax.swing.JLabel();
-        jComboStatus = new javax.swing.JComboBox<>();
-        jLabelProblem = new javax.swing.JLabel();
-        jLabelEngineer = new javax.swing.JLabel();
-        jComboEngineer = new javax.swing.JComboBox<>();
+        jTextNotes = new javax.swing.JTextArea();
+        jLabelTicketId = new javax.swing.JLabel();
+        jComboTicketId = new javax.swing.JComboBox<>();
+        jLabelTeamWH = new javax.swing.JLabel();
+        jComboTeamWH = new javax.swing.JComboBox<>();
         jButtonCancel = new javax.swing.JButton();
         jButtonSave = new javax.swing.JButton();
         jLabelId = new javax.swing.JLabel();
@@ -105,33 +101,19 @@ public class Frame_CreateTicket extends javax.swing.JFrame {
         jDesktopPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(143, 148, 251), 10));
 
         jLabelTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabelTitle.setText("Create New Ticket");
+        jLabelTitle.setText("Create New DO");
 
-        jTextProblem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextProblemActionPerformed(evt);
-            }
-        });
+        jLabelNotes.setText("Notes");
 
-        jLabelDescription.setText("Description");
+        jTextNotes.setColumns(20);
+        jTextNotes.setRows(5);
+        jScrollPane1.setViewportView(jTextNotes);
 
-        jTextDescription.setColumns(20);
-        jTextDescription.setRows(5);
-        jScrollPane1.setViewportView(jTextDescription);
+        jLabelTicketId.setText("Ticket ID");
 
-        jLabelCustomer.setText("Customer");
+        jComboTicketId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jComboCustomer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabelStatus.setText("Status");
-
-        jComboStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Open", "Pending", "On Progress", "Close" }));
-
-        jLabelProblem.setText("Problem");
-
-        jLabelEngineer.setText("PIC Engineer");
-
-        jComboEngineer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabelTeamWH.setText("PIC Warehouse");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -140,45 +122,35 @@ public class Frame_CreateTicket extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-                    .addComponent(jLabelCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelProblem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelEngineer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabelNotes, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+                    .addComponent(jLabelTicketId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelTeamWH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jComboStatus, javax.swing.GroupLayout.Alignment.LEADING, 0, 150, Short.MAX_VALUE)
-                        .addComponent(jComboCustomer, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextProblem, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jComboEngineer, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jComboTeamWH, javax.swing.GroupLayout.Alignment.LEADING, 0, 150, Short.MAX_VALUE)
+                        .addComponent(jComboTicketId, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelCustomer)
-                    .addComponent(jComboCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jComboTicketId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabelTicketId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboEngineer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEngineer))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelStatus)
-                    .addComponent(jComboStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jComboTeamWH)
+                    .addComponent(jLabelTeamWH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelProblem)
-                    .addComponent(jTextProblem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelDescription)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                    .addComponent(jLabelNotes)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         jButtonCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/cancel.png"))); // NOI18N
@@ -233,7 +205,7 @@ public class Frame_CreateTicket extends javax.swing.JFrame {
                 .addComponent(jLabelId)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancel)
                     .addComponent(jButtonSave))
@@ -256,24 +228,20 @@ public class Frame_CreateTicket extends javax.swing.JFrame {
 
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         if (getjButtonSave().getText().equals("Save")){
-            TicketController ticket = new TicketController(formTickets, home);
-            ticket.saveTicket(this);
-            ticket.showTickets();
+            DeliveryOrderController deliveryOrder = new DeliveryOrderController(formDeliveryOrders, home);
+            deliveryOrder.saveDeliveryOrder(this);
+            deliveryOrder.showDeliveryOrders();
         }
         else {
-            TicketController ticket = new TicketController(formTickets, home);
-            ticket.updateTicket(this);
-            ticket.showTickets();
+            DeliveryOrderController deliveryOrder = new DeliveryOrderController(formDeliveryOrders, home);
+            deliveryOrder.updateDeliveryOrder(this);
+            deliveryOrder.showDeliveryOrders();
         }
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_jButtonCancelActionPerformed
-
-    private void jTextProblemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextProblemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextProblemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -315,35 +283,38 @@ public class Frame_CreateTicket extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonSave;
-    private javax.swing.JComboBox<String> jComboCustomer;
-    private javax.swing.JComboBox<String> jComboEngineer;
-    private javax.swing.JComboBox<String> jComboStatus;
+    private javax.swing.JComboBox<String> jComboTeamWH;
+    private javax.swing.JComboBox<String> jComboTicketId;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JLabel jLabelCustomer;
-    private javax.swing.JLabel jLabelDescription;
-    private javax.swing.JLabel jLabelEngineer;
     private javax.swing.JLabel jLabelId;
-    private javax.swing.JLabel jLabelProblem;
-    private javax.swing.JLabel jLabelStatus;
+    private javax.swing.JLabel jLabelNotes;
+    private javax.swing.JLabel jLabelTeamWH;
+    private javax.swing.JLabel jLabelTicketId;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextDescription;
-    private javax.swing.JTextField jTextProblem;
+    private javax.swing.JTextArea jTextNotes;
     // End of variables declaration//GEN-END:variables
 
     /**
-     * @return the jComboCustomer
+     * @return the jButtonSave
      */
-    public javax.swing.JComboBox<String> getjComboCustomer() {
-        return jComboCustomer;
+    public javax.swing.JButton getjButtonSave() {
+        return jButtonSave;
     }
 
     /**
-     * @return the jComboStatus
+     * @return the jComboTeamWH
      */
-    public javax.swing.JComboBox<String> getjComboStatus() {
-        return jComboStatus;
+    public javax.swing.JComboBox<String> getjComboTeamWH() {
+        return jComboTeamWH;
+    }
+
+    /**
+     * @return the jComboTicketId
+     */
+    public javax.swing.JComboBox<String> getjComboTicketId() {
+        return jComboTicketId;
     }
 
     /**
@@ -361,35 +332,13 @@ public class Frame_CreateTicket extends javax.swing.JFrame {
     }
 
     /**
-     * @return the jButtonSave
+     * @return the jTextNotes
      */
-    public javax.swing.JButton getjButtonSave() {
-        return jButtonSave;
+    public javax.swing.JTextArea getjTextNotes() {
+        return jTextNotes;
     }
 
-    /**
-     * @return the jTextDescription
-     */
-    public javax.swing.JTextArea getjTextDescription() {
-        return jTextDescription;
-    }
-
-    /**
-     * @return the jTextProblem
-     */
-    public javax.swing.JTextField getjTextProblem() {
-        return jTextProblem;
-    }
-
-    /**
-     * @return the jComboEngineer
-     */
-    public javax.swing.JComboBox<String> getjComboEngineer() {
-        return jComboEngineer;
-    }
 
     
-
-
     
 }

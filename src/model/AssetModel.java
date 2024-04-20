@@ -25,6 +25,8 @@ public class AssetModel {
     private String serialNumber;
     private String description;
     private int qty;
+    
+    Connection sql = MysqlDB.connection();
 
     /**
      * @return the id
@@ -55,7 +57,6 @@ public class AssetModel {
     }
     
     public String getBrandNameById(int brandId) {
-        Connection sql = MysqlDB.connection();
         String brandName = null;
 
         try {
@@ -78,7 +79,6 @@ public class AssetModel {
     }
     
     public int getBrandIdByName(String brandName) {
-        Connection sql = MysqlDB.connection();
         int brand = 0;
 
         try {
@@ -116,7 +116,6 @@ public class AssetModel {
     }
     
     public String getCategoryNameById(int categoryId) {
-        Connection sql = MysqlDB.connection();
         String categoryName = null;
 
         try {
@@ -139,7 +138,6 @@ public class AssetModel {
     }
     
     public int getCategoryIdByName(String categoryName) {
-        Connection sql = MysqlDB.connection();
         int category = 0;
 
         try {
@@ -176,7 +174,6 @@ public class AssetModel {
     }
     
     public String getRackNameById(int rackId) {
-        Connection sql = MysqlDB.connection();
         String rackName = null;
 
         try {
@@ -199,7 +196,6 @@ public class AssetModel {
     }
     
     public int getRackIdByName(String rackName) {
-        Connection sql = MysqlDB.connection();
         int rack = 0;
 
         try {

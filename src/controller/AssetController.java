@@ -11,22 +11,20 @@ import model.AssetModel;
 import table.AssetTable;
 import view.Frame_CreateAsset;
 import view.form.Form_Assets;
-import view.main.Home;
 
 /**
  *
  * @author dandy
  */
 public class AssetController {
-    Home home;
+    
     Form_Assets formAssets;
     AssetDAO assetDAO;
     List<AssetModel> assets;
     
-    public AssetController(Form_Assets formAssets, Home home) {
-        this.home = home;
+    public AssetController(Form_Assets formAssets) {
         this.formAssets = formAssets;
-        assetDAO = new AssetDAO(this.home);
+        assetDAO = new AssetDAO();
     }
     
     public void showAssets() {

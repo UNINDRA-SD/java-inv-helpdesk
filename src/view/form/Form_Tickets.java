@@ -222,7 +222,7 @@ public class Form_Tickets extends javax.swing.JPanel {
             createTicketView.pack();
             createTicketView.setLocationRelativeTo(null);
             createTicketView.setAlwaysOnTop(true);
-            createTicketView.getjLabelTitle().setText("Edit Data Asset ");
+            createTicketView.getjLabelTitle().setText("Edit Data Ticket");
             createTicketView.getjButtonSave().setText("Update");
             createTicketView.getjLabelId().setVisible(false);
             
@@ -234,11 +234,18 @@ public class Form_Tickets extends javax.swing.JPanel {
             } else {
                 JOptionPane.showMessageDialog(this, "Customer '" + selectedCustomer + "' not found in ComboBox!", "Error", JOptionPane.ERROR_MESSAGE);
             }
+            
+            String selectedEngineer = jTableTickets.getValueAt(jTableTickets.getSelectedRow(), 2).toString();
+            if (isItemExist(createTicketView.getjComboEngineer(), selectedEngineer)) {
+                createTicketView.getjComboEngineer().setSelectedItem(selectedEngineer);
+            } else {
+                JOptionPane.showMessageDialog(this, "User Engineer '" + selectedEngineer + "' not found in ComboBox!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
            
             
-            createTicketView.getjTextProblem().setText((String) jTableTickets.getValueAt(jTableTickets.getSelectedRow(),2));
-            createTicketView.getjTextDescription().setText((String) jTableTickets.getValueAt(jTableTickets.getSelectedRow(),3));
-            String statusValue = (String) jTableTickets.getValueAt(jTableTickets.getSelectedRow(), 4);
+            createTicketView.getjTextProblem().setText((String) jTableTickets.getValueAt(jTableTickets.getSelectedRow(),3));
+            createTicketView.getjTextDescription().setText((String) jTableTickets.getValueAt(jTableTickets.getSelectedRow(),4));
+            String statusValue = (String) jTableTickets.getValueAt(jTableTickets.getSelectedRow(), 5);
             createTicketView.getjComboStatus().setSelectedItem(statusValue);
             
             createTicketView.setVisible(true);

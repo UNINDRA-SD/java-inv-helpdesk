@@ -13,7 +13,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import model.AssetModel;
 import model.TicketModel;
 import view.main.Home;
 
@@ -23,7 +22,7 @@ import view.main.Home;
  */
 public class TicketDAO {
     
-     Connection sql = MysqlDB.connection();
+    Connection sql = MysqlDB.connection();
     Home home;
     
     public TicketDAO(Home home) {
@@ -45,6 +44,7 @@ public class TicketDAO {
                 TicketModel ticket = new TicketModel();
                 ticket.setId(rslt.getInt("id"));
                 ticket.setCustomerId(rslt.getInt("customer_id"));
+                ticket.setUserId(rslt.getInt("user_id"));
                 ticket.setProblem(rslt.getString("problem"));
                 ticket.setDescription(rslt.getString("description"));
                 ticket.setStatus(rslt.getString("status"));
@@ -59,19 +59,21 @@ public class TicketDAO {
     public boolean saveTicket(TicketModel requestTicket){
 
         int customerId = requestTicket.getCustomerId();
+        int userId = requestTicket.getUserId();
         String status = requestTicket.getStatus();
         String problem = requestTicket.getProblem();     
         String description = requestTicket.getDescription();
         boolean isSuccess;
         
         try{
-            String query = "INSERT INTO tickets (customer_id, status, problem, description) VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO tickets (customer_id, user_id, status, problem, description) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement stmt = sql.prepareStatement(query);
             
             stmt.setInt(1,customerId);
-            stmt.setString(2,status);
-            stmt.setString(3,problem);
-            stmt.setString(4,description);
+            stmt.setInt(2,userId);
+            stmt.setString(3,status);
+            stmt.setString(4,problem);
+            stmt.setString(5,description);
             stmt.executeUpdate();
             stmt.close();
             isSuccess = true;
@@ -86,6 +88,7 @@ public class TicketDAO {
     public boolean updateTicket(TicketModel requestTicket){
 
         int customerId = requestTicket.getCustomerId();
+        int userId = requestTicket.getUserId();
         String status = requestTicket.getStatus();
         String problem = requestTicket.getProblem();     
         String description = requestTicket.getDescription();
@@ -93,14 +96,15 @@ public class TicketDAO {
         boolean isSuccess;
         
         try{
-            String query = "UPDATE tickets SET customer_id=?, status=?, problem=?, description=? WHERE id=?";
+            String query = "UPDATE tickets SET customer_id=?, user_id=?, status=?, problem=?, description=? WHERE id=?";
             PreparedStatement stmt = sql.prepareStatement(query);
             
             stmt.setInt(1,customerId);
-            stmt.setString(2,status);
-            stmt.setString(3,problem);
-            stmt.setString(4,description);
-            stmt.setInt(5, id);
+            stmt.setInt(2,userId);
+            stmt.setString(3,status);
+            stmt.setString(4,problem);
+            stmt.setString(5,description);
+            stmt.setInt(6, id);
             stmt.executeUpdate();
             stmt.close();
             isSuccess = true;

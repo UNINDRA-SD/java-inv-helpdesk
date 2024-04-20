@@ -39,7 +39,55 @@ public class UserDAO {
         List<UserModel> users = null;
         
         try {
-            String query = "select * from users order by id asc";
+            String query = "SELECT * FROM users ORDER BY id ASC";
+           
+            users = new ArrayList<>();
+            Statement stmt = sql.createStatement();
+            ResultSet rslt = stmt.executeQuery(query);
+            
+            while(rslt.next()) {
+                UserModel user = new UserModel();
+                user.setId(rslt.getInt("id"));
+                user.setEmail(rslt.getString("email"));
+                user.setName(rslt.getString("name"));
+                user.setRole(rslt.getString("role"));
+                users.add(user);
+            }
+        } catch (SQLException e) {
+        }
+        return users;
+    }
+    
+    public List<UserModel> getEngineers() {
+        
+        List<UserModel> users = null;
+        
+        try {
+            String query = "SELECT * FROM users WHERE role = 'Engineer' ORDER BY id ASC";
+           
+            users = new ArrayList<>();
+            Statement stmt = sql.createStatement();
+            ResultSet rslt = stmt.executeQuery(query);
+            
+            while(rslt.next()) {
+                UserModel user = new UserModel();
+                user.setId(rslt.getInt("id"));
+                user.setEmail(rslt.getString("email"));
+                user.setName(rslt.getString("name"));
+                user.setRole(rslt.getString("role"));
+                users.add(user);
+            }
+        } catch (SQLException e) {
+        }
+        return users;
+    }
+    
+    public List<UserModel> getWarehouses() {
+        
+        List<UserModel> users = null;
+        
+        try {
+            String query = "SELECT * FROM users WHERE role = 'Warehouse' ORDER BY id ASC";
            
             users = new ArrayList<>();
             Statement stmt = sql.createStatement();
