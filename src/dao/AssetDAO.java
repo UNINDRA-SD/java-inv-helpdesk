@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import model.AssetModel;
-import view.main.Home;
 
 /**
  *
@@ -22,11 +21,6 @@ import view.main.Home;
  */
 public class AssetDAO {
     Connection sql = MysqlDB.connection();
-    Home home;
-    
-    public AssetDAO(Home home) {
-        this.home = home;
-    }
     
     public List<AssetModel> getAssets() {
         

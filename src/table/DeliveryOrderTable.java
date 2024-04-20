@@ -6,24 +6,24 @@ package table;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import model.TicketModel;
+import model.DeliveryOrderModel;
 
 /**
  *
- * @author Aspire
+ * @author ACER
  */
-public class TicketTable extends AbstractTableModel {
-        List<TicketModel> tickets;
+public class DeliveryOrderTable extends AbstractTableModel {
+    List<DeliveryOrderModel> deliveryOrders;
     
-    private final String[] columnNames = {"ID", "Customer", "PIC Engineer", "Problem", "Description", "Status"};
+    private final String[] columnNames = {"ID", "Ticket ID", "PIC Warehouse", "Notes"};
     
-    public TicketTable(List<TicketModel> tickets) {
-        this.tickets = tickets;
+    public DeliveryOrderTable(List<DeliveryOrderModel> deliveryOrders) {
+        this.deliveryOrders = deliveryOrders;
     }
     
     @Override
     public int getRowCount() {
-        return tickets.size();
+        return deliveryOrders.size();
     }
     
     @Override
@@ -38,20 +38,16 @@ public class TicketTable extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        TicketModel ticket = tickets.get(rowIndex);
+        DeliveryOrderModel deliveryOrder = deliveryOrders.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return ticket.getId();
+                return deliveryOrder.getId();
             case 1:
-                return ticket.getCustomerNameById(ticket.getCustomerId());
+                return deliveryOrder.getTicketId();
             case 2:
-                return ticket.getUserEngineerNameById(ticket.getUserId());
+                return deliveryOrder.getUserWHNameById(deliveryOrder.getUserId());
             case 3:
-                return ticket.getProblem();
-            case 4:
-                return ticket.getDescription();
-            case 5:
-                return ticket.getStatus();
+                return deliveryOrder.getNotes();
             default:
                 return null;
         }

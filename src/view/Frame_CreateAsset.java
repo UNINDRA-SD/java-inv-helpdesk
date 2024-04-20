@@ -315,12 +315,12 @@ public class Frame_CreateAsset extends javax.swing.JFrame {
 
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         if (getjButtonSave().getText().equals("Save")){
-            AssetController asset = new AssetController(formAssets, home);
+            AssetController asset = new AssetController(formAssets);
             asset.saveAsset(this);
             asset.showAssets();
         }
         else {
-            AssetController asset = new AssetController(formAssets, home);
+            AssetController asset = new AssetController(formAssets);
             asset.updateAsset(this);
             asset.showAssets();
         }

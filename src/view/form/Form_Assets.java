@@ -204,7 +204,7 @@ public class Form_Assets extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonRefreshAssetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshAssetActionPerformed
-        assetController = new AssetController(this, home);
+        assetController = new AssetController(this);
         assetController.showAssets();
     }//GEN-LAST:event_jButtonRefreshAssetActionPerformed
 
@@ -268,7 +268,7 @@ public class Form_Assets extends javax.swing.JPanel {
         if (jTableAssets.getSelectedRow() >= 0){
             int dialogResult = JOptionPane.showConfirmDialog (this, "Do you want to delete this asset?","INFO",JOptionPane.WARNING_MESSAGE);
             if(dialogResult == JOptionPane.YES_OPTION){
-                assetController = new AssetController(this, this.home);
+                assetController = new AssetController(this);
                 String id = jTableAssets.getValueAt(jTableAssets.getSelectedRow(),0).toString();
                 assetController.deleteAsset(id);
                 assetController.showAssets();

@@ -76,7 +76,7 @@
                   <Component id="jLabelId" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="31" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButtonCancel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonSave" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -92,7 +92,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="24" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Create New Ticket"/>
+            <Property name="text" type="java.lang.String" value="Create New DO"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel1">
@@ -103,20 +103,16 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabelDescription" alignment="0" pref="101" max="32767" attributes="0"/>
-                          <Component id="jLabelCustomer" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabelStatus" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabelProblem" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabelEngineer" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabelNotes" alignment="0" pref="101" max="32767" attributes="0"/>
+                          <Component id="jLabelTicketId" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabelTeamWH" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane1" min="-2" pref="253" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jComboStatus" alignment="0" pref="150" max="32767" attributes="0"/>
-                              <Component id="jComboCustomer" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jTextProblem" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jComboEngineer" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jComboTeamWH" alignment="0" pref="150" max="32767" attributes="0"/>
+                              <Component id="jComboTicketId" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="18" max="32767" attributes="0"/>
@@ -127,44 +123,32 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jComboTicketId" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
+                              <Component id="jLabelTicketId" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jComboEngineer" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelEngineer" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabelStatus" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboStatus" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jComboTeamWH" max="32767" attributes="0"/>
+                          <Component id="jLabelTeamWH" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabelProblem" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextProblem" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelNotes" min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" min="-2" pref="99" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabelDescription" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" min="-2" pref="70" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="28" max="32767" attributes="0"/>
+                      <EmptySpace pref="25" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JTextField" name="jTextProblem">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextProblemActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabelDescription">
+            <Component class="javax.swing.JLabel" name="jLabelNotes">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Description"/>
+                <Property name="text" type="java.lang.String" value="Notes"/>
               </Properties>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -174,7 +158,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTextArea" name="jTextDescription">
+                <Component class="javax.swing.JTextArea" name="jTextNotes">
                   <Properties>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
@@ -182,12 +166,12 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JLabel" name="jLabelCustomer">
+            <Component class="javax.swing.JLabel" name="jLabelTicketId">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Customer"/>
+                <Property name="text" type="java.lang.String" value="Ticket ID"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboCustomer">
+            <Component class="javax.swing.JComboBox" name="jComboTicketId">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="4">
@@ -202,45 +186,15 @@
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelStatus">
+            <Component class="javax.swing.JLabel" name="jLabelTeamWH">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Status"/>
+                <Property name="text" type="java.lang.String" value="PIC Warehouse"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboStatus">
+            <Component class="javax.swing.JComboBox" name="jComboTeamWH">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Open"/>
-                    <StringItem index="1" value="Pending"/>
-                    <StringItem index="2" value="On Progress"/>
-                    <StringItem index="3" value="Close"/>
-                  </StringArray>
-                </Property>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabelProblem">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Problem"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabelEngineer">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="PIC Engineer"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="jComboEngineer">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
               </Properties>
               <AuxValues>

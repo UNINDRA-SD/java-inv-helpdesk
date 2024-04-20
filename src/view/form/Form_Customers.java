@@ -222,7 +222,7 @@ public class Form_Customers extends javax.swing.JPanel {
             createCustomerView.pack();
             createCustomerView.setLocationRelativeTo(null);
             createCustomerView.setAlwaysOnTop(true);
-            createCustomerView.getjLabelTitle().setText("Edit Data Customer ");
+            createCustomerView.getjLabelTitle().setText("Edit Data Customer");
             createCustomerView.getjButtonSave().setText("Update");
             createCustomerView.getjLabelId().setVisible(false);
             createCustomerView.getjLabelId().setText(jTableCustomers.getValueAt(jTableCustomers.getSelectedRow(),0).toString());

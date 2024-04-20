@@ -4,6 +4,7 @@ import controller.AssetController;
 import controller.BrandController;
 import controller.CategoryController;
 import controller.CustomerController;
+import controller.DeliveryOrderController;
 import controller.RackController;
 import controller.TicketController;
 import controller.UserController;
@@ -17,6 +18,7 @@ import view.form.Form_Users;
 import view.menu.EventMenuSelected;
 import view.form.Form_Customers;
 import view.form.Form_Categories;
+import view.form.Form_DeliveryOrders;
 import view.form.Form_Racks;
 import view.form.Form_Tickets;
 
@@ -52,6 +54,10 @@ public class Home extends javax.swing.JFrame {
 //  Form Assets
     AssetController assetController;
     Form_Assets formAssets;
+    
+//  Form Delivery Orders
+    DeliveryOrderController deliveryOrderController;
+    Form_DeliveryOrders formDeliveryOrders;
        
     public Home(UserModel userLogin) {
         this.userLogin = userLogin;
@@ -81,15 +87,20 @@ public class Home extends javax.swing.JFrame {
         customerController = new CustomerController(formCustomers, this);
         customerController.showCustomers();
 
-        //Form Customers
+        //Form Tickets
         formTickets = new Form_Tickets(userLogin);
         ticketController = new TicketController(formTickets, this);
         ticketController.showTickets();
         
-//        Form Assets
+//      Form Assets
         formAssets = new Form_Assets(userLogin);
-        assetController = new AssetController(formAssets, this);
+        assetController = new AssetController(formAssets);
         assetController.showAssets();
+        
+//      Form Delivery Orders
+        formDeliveryOrders = new Form_DeliveryOrders(userLogin);
+        deliveryOrderController = new DeliveryOrderController(formDeliveryOrders, this);
+        deliveryOrderController.showDeliveryOrders();
 
         initComponents();
         init();
@@ -118,6 +129,8 @@ public class Home extends javax.swing.JFrame {
                     showForm(formTickets);
                 } else if(index == 5 && indexSubMenu == 0) {
                     showForm(formAssets);
+                } else if(index == 6 && indexSubMenu == 0) {
+                    showForm(formDeliveryOrders);
                 }
                 else {
                     showForm(new Form_Empty(index + " " + indexSubMenu));

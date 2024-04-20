@@ -218,7 +218,7 @@ public class Form_Categories extends javax.swing.JPanel {
             createCategoryView.pack();
             createCategoryView.setLocationRelativeTo(null);
             createCategoryView.setAlwaysOnTop(true);
-            createCategoryView.getjLabelTitle().setText("Edit Data Brand");
+            createCategoryView.getjLabelTitle().setText("Edit Data Category");
             createCategoryView.getjButtonSave().setText("Update");
             createCategoryView.getjLabelId().setVisible(false);
             createCategoryView.getjLabelId().setText(jTableCategories.getValueAt(jTableCategories.getSelectedRow(),0).toString());
