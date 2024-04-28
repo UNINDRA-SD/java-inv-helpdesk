@@ -52,6 +52,37 @@ public class AssetDAO {
         }
         return assets;
     }
+            
+    public List<AssetModel> getAvailableAssets() {
+        
+        List<AssetModel> assets = null;
+        
+        try {
+            String query = "SELECT * FROM assets WHERE qty > 0 ORDER BY id ASC";
+           
+            assets = new ArrayList<>();
+            Statement stmt = sql.createStatement();
+            ResultSet rslt = stmt.executeQuery(query);
+            
+            while(rslt.next()) {
+                AssetModel asset = new AssetModel();
+                asset.setId(rslt.getInt("id"));
+                asset.setBrandId(rslt.getInt("brand_id"));
+                asset.setCategoryId(rslt.getInt("category_id"));
+                asset.setRackId(rslt.getInt("rack_id"));
+                asset.setName(rslt.getString("name"));
+                asset.setModelNumber(rslt.getString("model_number"));
+                asset.setPartNumber(rslt.getString("part_number"));
+                asset.setSerialNumber(rslt.getString("serial_number"));
+                asset.setDescription(rslt.getString("description"));
+                asset.setQty(rslt.getInt("qty"));
+                assets.add(asset);
+            }
+        } catch (SQLException err) {
+            System.out.println(err);
+        }
+        return assets;
+    }
     
     public boolean saveAsset(AssetModel requestAsset){
 

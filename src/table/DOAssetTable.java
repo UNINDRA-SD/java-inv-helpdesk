@@ -15,7 +15,7 @@ import model.DOAssetModel;
 public class DOAssetTable extends AbstractTableModel {
     List<DOAssetModel> doAssets;
     
-    private final String[] columnNames = {"Asset ID", "Brand", "Category", "Name", "Model/PN", "Serial Number", "Qty"};
+    private final String[] columnNames = {"ID", "Asset ID", "Brand", "Name", "Model/PN", "Serial Number", "Qty"};
     
     public DOAssetTable(List<DOAssetModel> doAssets) {
         this.doAssets = doAssets;
@@ -41,19 +41,19 @@ public class DOAssetTable extends AbstractTableModel {
         DOAssetModel doAsset = doAssets.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return doAsset.getAssetId();
+                return doAsset.getId();
             case 1:
-                return doAsset.getAssetBrandById(doAsset.getAssetId());
+                return doAsset.getAssetId();
             case 2:
-                return doAsset.getAssetCategoryById(doAsset.getAssetId());
+                return doAsset.getAssetBrandById(doAsset.getAssetId());
             case 3:
-                return doAsset.getAssetNameById(doAsset.getAssetId());
+                return doAsset.getAssetCategoryById(doAsset.getAssetId()) + "/" + doAsset.getAssetNameById(doAsset.getAssetId());
             case 4:
                 return doAsset.getAssetModelById(doAsset.getAssetId());
             case 5:
                 return doAsset.getAssetSerialNumberById(doAsset.getAssetId());
             case 6:
-                return doAsset.getAssetQtyById(doAsset.getAssetId());
+                return doAsset.getQty();
             default:
                 return null;
         }

@@ -13,6 +13,7 @@ public class CustomerModel {
     private String name;
     private String phone;
     private String address;
+    private String description;
 
     /**
      * @return the id
@@ -69,6 +70,21 @@ public class CustomerModel {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
     
     
 }

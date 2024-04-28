@@ -99,6 +99,31 @@ public class AssetModel {
         }
         return brand;
     }
+    
+    public String getBrandNameByAssetId(int assetId) {
+        String brandName = null;
+
+        try {
+            String query = "SELECT b.name "+
+                            "FROM assets a "+
+                            "JOIN brands b ON a.brand_id = b.id "+ 
+                            "WHERE a.id = ?";
+            PreparedStatement stmt = sql.prepareStatement(query);
+
+            stmt.setInt(1, assetId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                brandName = rs.getString("name");
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException err) {
+            System.out.println(err);
+        }
+        return brandName;
+    }
 
 
     /**
@@ -301,6 +326,87 @@ public class AssetModel {
         this.qty = qty;
     }
     
+    public static int getQtyByAssetId(Connection connection, int assetId) throws SQLException {
+        int assetQty = 0;
+        String query = "SELECT qty FROM assets WHERE id=? FOR UPDATE";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, assetId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    assetQty = rs.getInt("qty");
+                }
+            }
+        }
+        return assetQty;
+    }
+
+    public static void setMinQtyByAssetId(Connection connection, int assetId, int assetQty) throws SQLException {
+        String query = "UPDATE assets SET qty = qty - ? WHERE id=?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, assetQty);
+            stmt.setInt(2, assetId);
+            stmt.executeUpdate();
+        }
+    }
     
+//    public static int getQtyByAssetId(int assetId) {
+//        Connection sqlStatic = MysqlDB.connection();
+//        int assetQty = 0;
+//
+//        try {
+//            String query = "SELECT qty FROM assets WHERE id=?";
+//            try (PreparedStatement stmt = sqlStatic.prepareStatement(query)) {
+//                stmt.setInt(1, assetId);
+//                try (ResultSet rs = stmt.executeQuery()) {
+//                    if (rs.next()) {
+//                        assetQty = rs.getInt("qty");
+//                    }
+//                }
+//            }
+//        } catch (SQLException err) {
+//            System.out.println(err);
+//        }
+//        return assetQty;
+//    }
+//    
+//    public static void setMinQtyByAssetId(int assetId, int assetQty) {
+//        Connection sqlStatic = MysqlDB.connection();
+//        try {
+//            String query = "UPDATE assets SET qty = qty - ? WHERE id=?";
+//            try (PreparedStatement stmt = sqlStatic.prepareStatement(query)) {
+//                stmt.setInt(1, assetQty);
+//                stmt.setInt(2, assetId);
+//                stmt.executeUpdate();
+//                stmt.close();
+//            }
+//        } catch (SQLException err) {
+//            System.out.println(err);
+//        }
+//    }
+    
+    public static void setAddQtyByAssetId(Connection connection, int assetId, int assetQty) throws SQLException {
+        String query = "UPDATE assets SET qty = qty + ? WHERE id=?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, assetQty);
+            stmt.setInt(2, assetId);
+            stmt.executeUpdate();
+        }
+    }
+
+    
+//    public static void setAddQtyByAssetId(int assetId, int assetQty) {
+//        Connection sqlStatic = MysqlDB.connection();
+//        try {
+//            String query = "UPDATE assets SET qty = qty + ? WHERE id=?";
+//            try (PreparedStatement stmt = sqlStatic.prepareStatement(query)) {
+//                stmt.setInt(1, assetQty);
+//                stmt.setInt(2, assetId);
+//                stmt.executeUpdate();
+//                stmt.close();
+//            }
+//        } catch (SQLException err) {
+//            System.out.println(err);
+//        }
+//    }
     
 }

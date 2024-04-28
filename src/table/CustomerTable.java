@@ -15,7 +15,7 @@ import model.CustomerModel;
 public class CustomerTable extends AbstractTableModel {
         List<CustomerModel> customers;
     
-    private final String[] columnNames = {"ID", "Customer Name", "Phone", "Address" };
+    private final String[] columnNames = {"ID", "Customer Name", "Phone", "Address", "Description" };
     
     public CustomerTable(List<CustomerModel> customers) {
         this.customers = customers;
@@ -48,6 +48,8 @@ public class CustomerTable extends AbstractTableModel {
                 return customer.getPhone();
             case 3:
                 return customer.getAddress();
+            case 4:
+                return customer.getDescription();
             default:
                 return null;
         }

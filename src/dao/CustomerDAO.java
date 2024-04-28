@@ -33,7 +33,7 @@ public class CustomerDAO {
         List<CustomerModel> customers = null;
         
         try {
-            String query = "select * from customers order by id asc";
+            String query = "SELECT * FROM customers ORDER BY id ASC";
            
             customers = new ArrayList<>();
             Statement stmt = sql.createStatement();
@@ -45,6 +45,7 @@ public class CustomerDAO {
                 customer.setName(rslt.getString("name"));
                 customer.setPhone(rslt.getString("phone"));
                 customer.setAddress(rslt.getString("address"));
+                customer.setDescription(rslt.getString("description"));
                 customers.add(customer);
             }
         } catch (SQLException e) {
@@ -57,15 +58,17 @@ public class CustomerDAO {
         String name = requestCustomer.getName();
         String phone = requestCustomer.getPhone();
         String address = requestCustomer.getAddress();
+        String description = requestCustomer.getDescription();
         boolean isSuccess;
         
         try{
-            String query = "INSERT INTO customers (name, phone, address) VALUES (?,?,?)";
+            String query = "INSERT INTO customers (name, phone, address, description) VALUES (?,?,?,?)";
             PreparedStatement stmt = sql.prepareStatement(query);
             
             stmt.setString(1,name);
             stmt.setString(2, phone);
             stmt.setString(3, address);
+            stmt.setString(4, description);
             stmt.executeUpdate();
             stmt.close();
             isSuccess = true; 
@@ -85,17 +88,19 @@ public class CustomerDAO {
         String name = requestCustomer.getName();
         String phone = requestCustomer.getPhone();
         String address = requestCustomer.getAddress();
+        String description = requestCustomer.getDescription();
         int id = requestCustomer.getId();
         boolean isSuccess = false;
         
         try{
-            String query = "UPDATE customers SET name=?, phone=?, address=? WHERE id=?";
+            String query = "UPDATE customers SET name=?, phone=?, address=?, description=? WHERE id=?";
             PreparedStatement stmt = sql.prepareStatement(query);
             
             stmt.setString(1,name);
             stmt.setString(2,phone);
             stmt.setString(3,address);
-            stmt.setInt(4,id);
+            stmt.setString(4,description);
+            stmt.setInt(5,id);
             stmt.executeUpdate();
             stmt.close();
             isSuccess = true;

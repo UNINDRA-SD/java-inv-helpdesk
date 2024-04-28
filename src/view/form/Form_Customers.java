@@ -229,6 +229,7 @@ public class Form_Customers extends javax.swing.JPanel {
             createCustomerView.getjTextName().setText((String) jTableCustomers.getValueAt(jTableCustomers.getSelectedRow(),1));
             createCustomerView.getjTextPhone().setText((String) jTableCustomers.getValueAt(jTableCustomers.getSelectedRow(),2));
             createCustomerView.getjTextAddress().setText((String) jTableCustomers.getValueAt(jTableCustomers.getSelectedRow(),3));
+            createCustomerView.getjTextDescription().setText((String) jTableCustomers.getValueAt(jTableCustomers.getSelectedRow(),4));
             createCustomerView.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Select one data to edit!","WARNING",JOptionPane.WARNING_MESSAGE);

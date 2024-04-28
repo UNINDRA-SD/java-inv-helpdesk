@@ -38,12 +38,14 @@ public class CustomerController {
     public void saveCustomer(Frame_CreateCustomer createCustomerView) {
         if (!createCustomerView.getjTextName().getText().trim().isEmpty()
                 && !createCustomerView.getjTextPhone().getText().trim().isEmpty()
-                && !createCustomerView.getjTextAddress().getText().trim().isEmpty()){
+                && !createCustomerView.getjTextAddress().getText().trim().isEmpty()
+                && !createCustomerView.getjTextDescription().getText().trim().isEmpty()){
             
             CustomerModel customer = new CustomerModel();
             customer.setName(createCustomerView.getjTextName().getText());
             customer.setPhone(createCustomerView.getjTextPhone().getText());
             customer.setAddress(createCustomerView.getjTextAddress().getText());
+            customer.setDescription(createCustomerView.getjTextDescription().getText());
             
             if(customerDAO.saveCustomer(customer)) {
                 JOptionPane.showMessageDialog(createCustomerView, "Data saved successfully!","SUCCESS",JOptionPane.INFORMATION_MESSAGE);
@@ -60,13 +62,15 @@ public class CustomerController {
         
         if (!createCustomerView.getjTextName().getText().trim().isEmpty()
                 && !createCustomerView.getjTextPhone().getText().trim().isEmpty()
-                && !createCustomerView.getjTextAddress().getText().trim().isEmpty()){
+                && !createCustomerView.getjTextAddress().getText().trim().isEmpty()
+                && !createCustomerView.getjTextDescription().getText().trim().isEmpty()){
             
             CustomerModel customer = new CustomerModel();
             customer.setId(Integer.parseInt(createCustomerView.getjLabelId().getText()));
             customer.setName(createCustomerView.getjTextName().getText());
             customer.setPhone(createCustomerView.getjTextPhone().getText());
             customer.setAddress(createCustomerView.getjTextAddress().getText());
+            customer.setDescription(createCustomerView.getjTextDescription().getText());
             if(customerDAO.updateCustomer(customer)) {
                 JOptionPane.showMessageDialog(createCustomerView, "Data updated successfully!","SUCCESS",JOptionPane.INFORMATION_MESSAGE);
             } else {

@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import model.DOAssetModel;
 
 /**
@@ -39,6 +40,7 @@ public class DOAssetDAO {
                 doAsset.setId(rslt.getInt("id"));
                 doAsset.setDeliveryOrderId(rslt.getInt("delivery_order_id"));
                 doAsset.setAssetId(rslt.getInt("asset_id"));
+                doAsset.setQty(rslt.getInt("qty"));
                 doAsset.setStatus(rslt.getString("status"));
                 doAssets.add(doAsset);
             }
@@ -53,5 +55,54 @@ public class DOAssetDAO {
 
         return doAssets;
     }
+    
+    public boolean saveDOAsset(DOAssetModel requestDOAsset){
+
+        int doId = requestDOAsset.getDeliveryOrderId();
+        int assetId = requestDOAsset.getAssetId();
+        int qty = requestDOAsset.getQty();
+        boolean isSuccess;
+        
+        try{
+            String query = "INSERT INTO do_assets (delivery_order_id, asset_id, qty) VALUES (?, ?, ?)";
+            PreparedStatement stmt = sql.prepareStatement(query);
+            
+            stmt.setInt(1,doId);
+            stmt.setInt(2,assetId);
+            stmt.setInt(3,qty);
+            stmt.executeUpdate();
+            stmt.close();
+            isSuccess = true;
+            
+        }catch(SQLException err){
+            System.out.println(err);
+            isSuccess = false;
+        }
+        return isSuccess;
+    }
+    
+    public void deleteDOAsset(Connection connection, String id) throws SQLException {
+        String query = "DELETE FROM do_assets WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            // Setel parameter ID dalam query
+            stmt.setInt(1, Integer.parseInt(id));
+            // Jalankan pernyataan
+            stmt.executeUpdate();
+        }
+    }
+
+//    public void deleteDOAsset(String id){
+//        
+//        try{
+//            
+//            String query="DELETE FROM do_assets WHERE id="+id;
+//            PreparedStatement stmt = sql.prepareStatement(query);
+//            stmt.executeUpdate();
+//            stmt.close();
+//            
+//        }catch(SQLException err){
+//            JOptionPane.showMessageDialog(null,"Data failed to be delete!","ERROR",JOptionPane.ERROR_MESSAGE);
+//        }
+//    }
 
 }

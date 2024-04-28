@@ -150,6 +150,12 @@ public class Frame_CreateAsset extends javax.swing.JFrame {
         jTextDescription.setRows(5);
         jScrollPane1.setViewportView(jTextDescription);
 
+        jTextQty.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextQtyKeyTyped(evt);
+            }
+        });
+
         jLabelQty.setText("Qty");
 
         jLabelPartNumber.setText("Part Number");
@@ -333,6 +339,13 @@ public class Frame_CreateAsset extends javax.swing.JFrame {
     private void jTextModelNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextModelNumberActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextModelNumberActionPerformed
+
+    private void jTextQtyKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextQtyKeyTyped
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextQtyKeyTyped
 
     /**
      * @param args the command line arguments

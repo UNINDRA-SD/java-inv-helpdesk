@@ -171,6 +171,33 @@ public class DeliveryOrderModel {
         return customerName;
     }
     
+    public String getCustomerDescriptionByTicketId(int ticketId) {
+        String customerDesc = null;
+
+        try {
+            String query = "SELECT c.description " +
+                           "FROM tickets t " +
+                           "JOIN customers c ON t.customer_id = c.id " +
+                           "WHERE t.id = ?";
+
+            PreparedStatement stmt = sql.prepareStatement(query);
+            stmt.setInt(1, ticketId);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                customerDesc = rs.getString("description");
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException err) {
+            System.out.println(err);
+        }
+
+        return customerDesc;
+    }
+    
     public String getEngineerNameByTicketId(int ticketId) {
         String userName = null;
 
