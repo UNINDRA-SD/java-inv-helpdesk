@@ -281,14 +281,14 @@ public class Form_DeliveryOrders extends javax.swing.JPanel {
             detailDeliveryOrderView.pack();
             detailDeliveryOrderView.setLocationRelativeTo(null);
             detailDeliveryOrderView.setAlwaysOnTop(true);
-            detailDeliveryOrderView.getjLabelId().setVisible(false);
+            detailDeliveryOrderView.getjLabelId().setVisible(true);
             
             String doIdString = jTableDeliveryOrders.getValueAt(jTableDeliveryOrders.getSelectedRow(), 0).toString();
             detailDeliveryOrderView.getjLabelId().setText(doIdString);
             String ticketIdString = jTableDeliveryOrders.getValueAt(jTableDeliveryOrders.getSelectedRow(),1).toString();
             detailDeliveryOrderView.getjTextTicketId().setText(ticketIdString);
             detailDeliveryOrderView.getjTextTeamWarehouse().setText((String) jTableDeliveryOrders.getValueAt(jTableDeliveryOrders.getSelectedRow(),2));
-            detailDeliveryOrderView.getjTextCustomerDescription().setText("Description Customer");
+            
             
             DeliveryOrderModel deliveryOrder = new DeliveryOrderModel();
             String ticketStatus = deliveryOrder.getTicketStatusById(Integer.parseInt(ticketIdString));
@@ -296,16 +296,18 @@ public class Form_DeliveryOrders extends javax.swing.JPanel {
             String ticketProblem = deliveryOrder.getTicketProblemById(Integer.parseInt(ticketIdString));
             String ticketDescription = deliveryOrder.getTicketDescriptionById(Integer.parseInt(ticketIdString));
             String ticketEngineer = deliveryOrder.getEngineerNameByTicketId(Integer.parseInt(ticketIdString));
+            String customerDescription = deliveryOrder.getCustomerDescriptionByTicketId(Integer.parseInt(ticketIdString));
             
             detailDeliveryOrderView.getjTextTicketStatus().setText(ticketStatus);
             detailDeliveryOrderView.getjTextCustomerName().setText(customerName);
             detailDeliveryOrderView.getjTextProblem().setText(ticketProblem);
             detailDeliveryOrderView.getjTextTeamEngineer().setText(ticketEngineer);
             detailDeliveryOrderView.getjTextTicketDescription().setText(ticketDescription);
+            detailDeliveryOrderView.getjTextCustomerDescription().setText(customerDescription);
             
             
             int doId = Integer.parseInt(doIdString);
-            doAssetController = new DOAssetController(detailDeliveryOrderView, this);
+            doAssetController = new DOAssetController(detailDeliveryOrderView);
             doAssetController.showDOAssets(doId);
             
             detailDeliveryOrderView.setVisible(true);

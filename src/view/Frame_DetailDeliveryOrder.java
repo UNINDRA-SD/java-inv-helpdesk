@@ -4,12 +4,9 @@
  */
 package view;
 
-import dao.TicketDAO;
-import dao.UserDAO;
-import java.util.List;
+import controller.DOAssetController;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import model.TicketModel;
-import model.UserModel;
 import view.form.Form_DeliveryOrders;
 import view.main.Home;
 
@@ -21,15 +18,9 @@ public class Frame_DetailDeliveryOrder extends javax.swing.JFrame {
 
     
     Form_DeliveryOrders formDeliveryOrders;
+    DOAssetController doAssetController;
+    Frame_AddDOAsset addDOAssetView;
     Home home;
-    
-    //Load Ticket List ComboBox
-    TicketDAO ticketDAO;
-    List<TicketModel> tickets;
-    
-    //Load User Team WH List ComboBox
-    UserDAO userDAO;
-    List<UserModel> users;
     
     /**
      * Creates new form JFCreateUser
@@ -39,7 +30,7 @@ public class Frame_DetailDeliveryOrder extends javax.swing.JFrame {
         this.home = home;
         initComponents();
         
-        jLabelId.setVisible(false);
+        jLabelId.setVisible(true);
     }
     
     public JTable getDataTable() {
@@ -333,11 +324,29 @@ public class Frame_DetailDeliveryOrder extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void jButtonAddAssetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddAssetActionPerformed
-        // TODO add your handling code here:
+        addDOAssetView = new Frame_AddDOAsset(this, home);
+        addDOAssetView.getjLabelId().setText(getjLabelId().getText());
+        addDOAssetView.pack();
+        addDOAssetView.setLocationRelativeTo(null);
+        addDOAssetView.setVisible(true);
+        addDOAssetView.setAlwaysOnTop(true);
     }//GEN-LAST:event_jButtonAddAssetActionPerformed
 
     private void jButtonDeleteAssetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteAssetActionPerformed
-        // TODO add your handling code here:
+        if (jTableDOAssets.getSelectedRow() >= 0){
+            int dialogResult = JOptionPane.showConfirmDialog (this, "Do you want to delete this asset in DO?","INFO",JOptionPane.WARNING_MESSAGE);
+            if(dialogResult == JOptionPane.YES_OPTION){
+                doAssetController = new DOAssetController(this);
+                String id = jTableDOAssets.getValueAt(jTableDOAssets.getSelectedRow(),0).toString();
+                int assetId = Integer.parseInt(jTableDOAssets.getValueAt(jTableDOAssets.getSelectedRow(),1).toString());
+                int qty = Integer.parseInt(jTableDOAssets.getValueAt(jTableDOAssets.getSelectedRow(),6).toString());
+                doAssetController.deleteDOAsset(id, assetId, qty, this);
+                int doId = Integer.parseInt(getjLabelId().getText());
+                doAssetController.showDOAssets(doId);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Select one data to delete!","WARNING",JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonDeleteAssetActionPerformed
 
     private void jTextCustomerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCustomerNameActionPerformed
@@ -509,9 +518,16 @@ public class Frame_DetailDeliveryOrder extends javax.swing.JFrame {
     public javax.swing.JLabel getjLabelId() {
         return jLabelId;
     }
-
-       
-   
-  
     
+    public void hideIdColumn() {
+        // Gunakan nama variabel yang berbeda untuk jTableDOAssets
+        JTable table = getDataTable();
+
+        // Sembunyikan kolom ID (kolom pertama)
+        table.getColumnModel().getColumn(0).setMinWidth(0);
+        table.getColumnModel().getColumn(0).setMaxWidth(0);
+        table.getColumnModel().getColumn(0).setWidth(0);
+    }
+
+
 }

@@ -7,6 +7,7 @@ package config;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,6 +29,11 @@ public class MysqlDB {
             try {
                 con = dataSource.getConnection();
             } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null,
+                        "Error: Unable to connect to the database.\n" +
+                        "Please check the server settings and try again.",
+                        "Database Connection Error",
+                        JOptionPane.ERROR_MESSAGE);
                 System.out.println(e);
                 System.out.println("[ERROR] Database Can't Connect, Application Will Automatically Shutdown!");
                 System.exit(0);

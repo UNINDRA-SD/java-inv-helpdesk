@@ -18,6 +18,7 @@ public class DOAssetModel {
     private int id;
     private int deliveryOrderId;
     private int assetId;
+    private int qty;
     private String status;
     
     Connection sql = MysqlDB.connection();
@@ -219,6 +220,20 @@ public class DOAssetModel {
     }
 
     /**
+     * @return the qty
+     */
+    public int getQty() {
+        return qty;
+    }
+
+    /**
+     * @param qty the qty to set
+     */
+    public void setQty(int qty) {
+        this.qty = qty;
+    }
+
+    /**
      * @return the status
      */
     public String getStatus() {
@@ -231,6 +246,8 @@ public class DOAssetModel {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    
 
     
     
