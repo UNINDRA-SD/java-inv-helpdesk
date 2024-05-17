@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 import model.DOAssetModel;
 
 /**
@@ -64,12 +63,13 @@ public class DOAssetDAO {
         boolean isSuccess;
         
         try{
-            String query = "INSERT INTO do_assets (delivery_order_id, asset_id, qty) VALUES (?, ?, ?)";
+            String query = "INSERT INTO do_assets (delivery_order_id, asset_id, qty, status) VALUES (?, ?, ?, ?)";
             PreparedStatement stmt = sql.prepareStatement(query);
             
             stmt.setInt(1,doId);
             stmt.setInt(2,assetId);
             stmt.setInt(3,qty);
+            stmt.setString(4, "Deliver");
             stmt.executeUpdate();
             stmt.close();
             isSuccess = true;
@@ -104,5 +104,27 @@ public class DOAssetDAO {
 //            JOptionPane.showMessageDialog(null,"Data failed to be delete!","ERROR",JOptionPane.ERROR_MESSAGE);
 //        }
 //    }
+    
+    public int getDOSettlementIDByDOAssetId(int id) {
+        int doSettlementID = -1;
+        try {
+            String query = "SELECT id FROM do_settlements WHERE do_asset_id = ?";
+
+            PreparedStatement stmt = sql.prepareStatement(query);
+            stmt.setInt(1, id);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                doSettlementID = rs.getInt("id");
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return doSettlementID;
+    }
 
 }

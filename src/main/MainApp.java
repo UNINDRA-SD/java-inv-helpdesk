@@ -4,6 +4,9 @@
  */
 package main;
 
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import javax.swing.UIManager;
+import view.system.SystemColor;
 import view.Frame_Login;
 
 /**
@@ -12,6 +15,7 @@ import view.Frame_Login;
  */
 public class MainApp {
     public static void main(String[] args) {
+        FlatMacLightLaf.setup();
         Frame_Login loginView = new Frame_Login();
         loginView.pack();
         loginView.setLocationRelativeTo(null);

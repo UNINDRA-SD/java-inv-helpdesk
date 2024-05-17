@@ -129,29 +129,29 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboCustomer" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jComboEngineer" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboEngineer" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="jLabelEngineer" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabelStatus" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboStatus" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboStatus" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabelProblem" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextProblem" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextProblem" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabelDescription" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" min="-2" pref="70" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="28" max="32767" attributes="0"/>
+                      <EmptySpace pref="12" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

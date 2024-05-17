@@ -169,6 +169,31 @@ public class DOAssetModel {
         return assetModel;
     }
     
+    public String getAssetPartNumberById(int assetId) {
+        String assetPN = null;
+
+        try {
+            String query = """
+                           SELECT part_number
+                           FROM assets
+                           WHERE id = ?;""";
+            PreparedStatement stmt = sql.prepareStatement(query);
+
+            stmt.setInt(1, assetId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                assetPN = rs.getString("part_number");
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException err) {
+            System.out.println(err);
+        }
+        return assetPN;
+    }
+    
     public String getAssetSerialNumberById(int assetId) {
         String assetSN = null;
 
@@ -192,6 +217,31 @@ public class DOAssetModel {
             System.out.println(err);
         }
         return assetSN;
+    }
+    
+    public String getAssetDescriptionById(int assetId) {
+        String assetDesc = null;
+
+        try {
+            String query = """
+                           SELECT description
+                           FROM assets
+                           WHERE id = ?;""";
+            PreparedStatement stmt = sql.prepareStatement(query);
+
+            stmt.setInt(1, assetId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                assetDesc = rs.getString("description");
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException err) {
+            System.out.println(err);
+        }
+        return assetDesc;
     }
     
     public int getAssetQtyById(int assetId) {
