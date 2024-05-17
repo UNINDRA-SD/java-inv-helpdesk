@@ -201,4 +201,12 @@ public class DOAssetController {
 //        JOptionPane.showMessageDialog(deliveryOrderView,"Qty stock: | "+ qty +" | has been returned to Asset ID : | "+ assetId + " | Total Qty stock : | " + AssetModel.getQtyByAssetId(assetId) + " |","INFO",JOptionPane.INFORMATION_MESSAGE);
 //        doAssetDAO.deleteDOAsset(id);
 //    }
+    
+    public void printDO(Frame_DetailDeliveryOrder detailDeliveryOrder, String dir){
+        
+    }
+    
+    public int getDOSettlementByDOAssetId(int id){
+        return doAssetDAO.getDOSettlementIDByDOAssetId(id);
+    }
 }

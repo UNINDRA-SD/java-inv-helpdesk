@@ -1,5 +1,6 @@
 package view.main;
 
+import controller.ActivityReportController;
 import controller.AssetController;
 import controller.BrandController;
 import controller.CategoryController;
@@ -10,6 +11,7 @@ import controller.TicketController;
 import controller.UserController;
 import java.awt.Component;
 import model.UserModel;
+import view.form.Form_ActivityReports;
 import view.form.Form_Assets;
 import view.form.Form_Brands;
 import view.form.Form_Dashboard;
@@ -58,6 +60,10 @@ public class Home extends javax.swing.JFrame {
 //  Form Delivery Orders
     DeliveryOrderController deliveryOrderController;
     Form_DeliveryOrders formDeliveryOrders;
+
+//  Activity Reports
+    ActivityReportController activityReportController;
+    Form_ActivityReports formActivityReports;
        
     public Home(UserModel userLogin) {
         this.userLogin = userLogin;
@@ -102,6 +108,11 @@ public class Home extends javax.swing.JFrame {
         deliveryOrderController = new DeliveryOrderController(formDeliveryOrders, this);
         deliveryOrderController.showDeliveryOrders();
 
+//      Form Delivery Orders
+        formActivityReports = new Form_ActivityReports(userLogin);
+        activityReportController = new ActivityReportController(formActivityReports, this);
+        activityReportController.showActivityReports();
+
         initComponents();
         init();
     }
@@ -131,6 +142,8 @@ public class Home extends javax.swing.JFrame {
                     showForm(formAssets);
                 } else if(index == 6 && indexSubMenu == 0) {
                     showForm(formDeliveryOrders);
+                } else if(index == 7 && indexSubMenu == 0) {
+                    showForm(formActivityReports);
                 }
                 else {
                     showForm(new Form_Empty(index + " " + indexSubMenu));

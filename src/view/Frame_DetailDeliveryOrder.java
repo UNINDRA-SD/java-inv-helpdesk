@@ -5,8 +5,11 @@
 package view;
 
 import controller.DOAssetController;
+import controller.DOSettlementController;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import model.DOSettlementModel;
 import view.form.Form_DeliveryOrders;
 import view.main.Home;
 
@@ -20,6 +23,7 @@ public class Frame_DetailDeliveryOrder extends javax.swing.JFrame {
     Form_DeliveryOrders formDeliveryOrders;
     DOAssetController doAssetController;
     Frame_AddDOAsset addDOAssetView;
+    Frame_CreateSettlement createSettlementView;
     Home home;
     
     /**
@@ -30,7 +34,7 @@ public class Frame_DetailDeliveryOrder extends javax.swing.JFrame {
         this.home = home;
         initComponents();
         
-        jLabelId.setVisible(true);
+        jLabelId.setVisible(false);
     }
     
     public JTable getDataTable() {
@@ -70,6 +74,7 @@ public class Frame_DetailDeliveryOrder extends javax.swing.JFrame {
         jTextCustomerDescription = new javax.swing.JTextArea();
         jTextTeamWarehouse = new javax.swing.JTextField();
         jTextTeamEngineer = new javax.swing.JTextField();
+        jButtonReplaceAsset = new javax.swing.JButton();
         jTextCustomerName = new javax.swing.JTextField();
         jButtonCancel = new javax.swing.JButton();
         jButtonPrintDO = new javax.swing.JButton();
@@ -148,12 +153,15 @@ public class Frame_DetailDeliveryOrder extends javax.swing.JFrame {
 
         jTextTeamEngineer.setEditable(false);
 
-        jTextCustomerName.setEditable(false);
-        jTextCustomerName.addActionListener(new java.awt.event.ActionListener() {
+        jButtonReplaceAsset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/folder_go.png"))); // NOI18N
+        jButtonReplaceAsset.setText("Settle Asset");
+        jButtonReplaceAsset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextCustomerNameActionPerformed(evt);
+                jButtonReplaceAssetActionPerformed(evt);
             }
         });
+
+        jTextCustomerName.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -165,39 +173,41 @@ public class Frame_DetailDeliveryOrder extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButtonAddAsset)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonDeleteAsset))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabelDescription, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabelTicketId, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabelTeamWH, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jTextTicketStatus)
-                                .addComponent(jTextTicketId, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextProblem, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextTeamWarehouse))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextTeamEngineer))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextCustomerName))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabelDescription1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jScrollPane3))))))
+                        .addComponent(jButtonDeleteAsset)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonReplaceAsset, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelDescription, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelTicketId, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelTeamWH, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextTicketStatus)
+                            .addComponent(jTextTicketId, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextProblem, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextTeamWarehouse))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextTeamEngineer))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextCustomerName))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabelDescription1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane3)))))
                 .addGap(30, 30, 30))
         );
         jPanel1Layout.setVerticalGroup(
@@ -206,21 +216,23 @@ public class Frame_DetailDeliveryOrder extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextTicketStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextTicketStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextTeamWarehouse, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextTeamWarehouse, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextTicketId, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelTicketId, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextTeamEngineer, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextTeamEngineer, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextTicketId, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelTicketId, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelTeamWH, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextProblem, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabelTeamWH, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextProblem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -231,11 +243,12 @@ public class Frame_DetailDeliveryOrder extends javax.swing.JFrame {
                         .addGap(40, 40, 40)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonAddAsset)
-                            .addComponent(jButtonDeleteAsset)))
+                            .addComponent(jButtonDeleteAsset)
+                            .addComponent(jButtonReplaceAsset)))
                     .addComponent(jLabelDescription1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
         jButtonCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/cancel.png"))); // NOI18N
@@ -316,7 +329,12 @@ public class Frame_DetailDeliveryOrder extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonPrintDOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrintDOActionPerformed
-
+        JFileChooser chooser = new JFileChooser("");
+        int r = chooser.showSaveDialog(this);
+        if (r == JFileChooser.APPROVE_OPTION) {
+        String dir = chooser.getSelectedFile().getAbsolutePath();
+            doAssetController.printDO(this, dir);
+        }
     }//GEN-LAST:event_jButtonPrintDOActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
@@ -339,7 +357,7 @@ public class Frame_DetailDeliveryOrder extends javax.swing.JFrame {
                 doAssetController = new DOAssetController(this);
                 String id = jTableDOAssets.getValueAt(jTableDOAssets.getSelectedRow(),0).toString();
                 int assetId = Integer.parseInt(jTableDOAssets.getValueAt(jTableDOAssets.getSelectedRow(),1).toString());
-                int qty = Integer.parseInt(jTableDOAssets.getValueAt(jTableDOAssets.getSelectedRow(),6).toString());
+                int qty = Integer.parseInt(jTableDOAssets.getValueAt(jTableDOAssets.getSelectedRow(),9).toString());
                 doAssetController.deleteDOAsset(id, assetId, qty, this);
                 int doId = Integer.parseInt(getjLabelId().getText());
                 doAssetController.showDOAssets(doId);
@@ -349,9 +367,57 @@ public class Frame_DetailDeliveryOrder extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonDeleteAssetActionPerformed
 
-    private void jTextCustomerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCustomerNameActionPerformed
+    private void jButtonReplaceAssetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReplaceAssetActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextCustomerNameActionPerformed
+        int doId = Integer.parseInt(getjLabelId().getText());
+        if (jTableDOAssets.getSelectedRow() >= 0){
+            doAssetController = new DOAssetController(this);
+            String id = jTableDOAssets.getValueAt(jTableDOAssets.getSelectedRow(),0).toString();
+            String assetId = jTableDOAssets.getValueAt(jTableDOAssets.getSelectedRow(),1).toString();
+            String model = jTableDOAssets.getValueAt(jTableDOAssets.getSelectedRow(),5).toString();
+            String serialNumber = jTableDOAssets.getValueAt(jTableDOAssets.getSelectedRow(),7).toString();
+            String name = jTableDOAssets.getValueAt(jTableDOAssets.getSelectedRow(),4).toString();
+            String qty = jTableDOAssets.getValueAt(jTableDOAssets.getSelectedRow(),9).toString();
+            if(doAssetController.getDOSettlementByDOAssetId(Integer.parseInt(id)) != -1) {
+                int doSettlementId = doAssetController.getDOSettlementByDOAssetId(Integer.parseInt(id));
+                createSettlementView = new Frame_CreateSettlement(this, home, doId);
+                createSettlementView.pack();
+                createSettlementView.setLocationRelativeTo(null);
+                createSettlementView.getjLabelTitle().setText("Edit Asset Settlement");
+                createSettlementView.getjButtonSave().setText("Update");
+                createSettlementView.setVisible(true);
+                createSettlementView.setAlwaysOnTop(true);
+                createSettlementView.getjLabelId().setText(Integer.toString(doSettlementId));
+                createSettlementView.getjTextDOAssetId().setText(id + " / " + assetId);
+                createSettlementView.getjTextModelNumber().setText(model);
+                createSettlementView.getjTextSerialNumber().setText(serialNumber);
+                createSettlementView.getjTextName().setText(name);
+                createSettlementView.getjTextQty().setText(qty);
+                
+                // get data
+                DOSettlementController doSettlementController = new DOSettlementController();
+                DOSettlementModel doSettlement = doSettlementController.getSettlementById(doSettlementId);
+                createSettlementView.getjTextFaultyName().setText(doSettlement.getFaultName());
+                createSettlementView.getjTextFaultyModel().setText(doSettlement.getFaultModelNumber());
+                createSettlementView.getjTextFaultySerialNumber().setText(doSettlement.getFaultSerialNumber());
+                createSettlementView.getjTextFaultyQty().setText(Integer.toString(doSettlement.getFaultQty()));
+                createSettlementView.getjTextNotes().setText(doSettlement.getNotes());
+            } else {
+                createSettlementView = new Frame_CreateSettlement(this, home, doId);
+                createSettlementView.pack();
+                createSettlementView.setLocationRelativeTo(null);
+                createSettlementView.setVisible(true);
+                createSettlementView.setAlwaysOnTop(true);
+                createSettlementView.getjTextDOAssetId().setText(id + " | " + assetId);
+                createSettlementView.getjTextModelNumber().setText(model);
+                createSettlementView.getjTextSerialNumber().setText(serialNumber);
+                createSettlementView.getjTextName().setText(name);
+                createSettlementView.getjTextQty().setText(qty);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Select one data to create replacement!","WARNING",JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonReplaceAssetActionPerformed
 
     /**
      * @param args the command line arguments
@@ -395,6 +461,7 @@ public class Frame_DetailDeliveryOrder extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonDeleteAsset;
     private javax.swing.JButton jButtonPrintDO;
+    private javax.swing.JButton jButtonReplaceAsset;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -527,6 +594,15 @@ public class Frame_DetailDeliveryOrder extends javax.swing.JFrame {
         table.getColumnModel().getColumn(0).setMinWidth(0);
         table.getColumnModel().getColumn(0).setMaxWidth(0);
         table.getColumnModel().getColumn(0).setWidth(0);
+        table.getColumnModel().getColumn(3).setMinWidth(0);
+        table.getColumnModel().getColumn(3).setMaxWidth(0);
+        table.getColumnModel().getColumn(3).setWidth(0);
+        table.getColumnModel().getColumn(6).setMinWidth(0);
+        table.getColumnModel().getColumn(6).setMaxWidth(0);
+        table.getColumnModel().getColumn(6).setWidth(0);
+        table.getColumnModel().getColumn(8).setMinWidth(0);
+        table.getColumnModel().getColumn(8).setMaxWidth(0);
+        table.getColumnModel().getColumn(8).setWidth(0);
     }
 
 

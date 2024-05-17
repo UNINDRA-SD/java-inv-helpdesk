@@ -281,7 +281,7 @@ public class Form_DeliveryOrders extends javax.swing.JPanel {
             detailDeliveryOrderView.pack();
             detailDeliveryOrderView.setLocationRelativeTo(null);
             detailDeliveryOrderView.setAlwaysOnTop(true);
-            detailDeliveryOrderView.getjLabelId().setVisible(true);
+            detailDeliveryOrderView.getjLabelId().setVisible(false);
             
             String doIdString = jTableDeliveryOrders.getValueAt(jTableDeliveryOrders.getSelectedRow(), 0).toString();
             detailDeliveryOrderView.getjLabelId().setText(doIdString);

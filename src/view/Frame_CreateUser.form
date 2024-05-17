@@ -136,22 +136,22 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelEmail" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="jTextEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextEmail" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelName" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="jTextName" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextName" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelPassword" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="jTextPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextPassword" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelRole" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="jComboRole" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboRole" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
