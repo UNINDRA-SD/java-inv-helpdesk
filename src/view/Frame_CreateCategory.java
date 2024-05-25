@@ -5,6 +5,8 @@
 package view;
 
 import controller.CategoryController;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import view.form.Form_Categories;
 import view.main.Home;
 
@@ -24,6 +26,9 @@ public class Frame_CreateCategory extends javax.swing.JFrame {
         this.formCategories = formCategories;
         this.home = home;
         initComponents();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/asset/inv2.png"));
+        Image image = icon.getImage();
+        setIconImage(image);
         
         jLabelId.setVisible(false);
     }

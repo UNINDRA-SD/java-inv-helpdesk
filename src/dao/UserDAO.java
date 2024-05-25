@@ -123,7 +123,6 @@ public class UserDAO {
             stmt.setString(3,password);
             stmt.setString(4,role);
             stmt.executeUpdate();
-            stmt.close();
             isSuccess = true;
             
         }catch(SQLException err){
@@ -152,7 +151,6 @@ public class UserDAO {
             stmt.setString(4,role);
             stmt.setInt(5,id);
             stmt.executeUpdate();
-            stmt.close();
             isSuccess = true;
             
         }catch(SQLException err){
@@ -169,7 +167,6 @@ public class UserDAO {
             String query="DELETE FROM users WHERE id="+id;
             PreparedStatement stmt = sql.prepareStatement(query);
             stmt.executeUpdate();
-            stmt.close();
             
         }catch(SQLException err){
             JOptionPane.showMessageDialog(null,"Data failed to be delete!","ERROR",JOptionPane.ERROR_MESSAGE);

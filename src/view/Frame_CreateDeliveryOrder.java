@@ -7,8 +7,10 @@ package view;
 import controller.DeliveryOrderController;
 import dao.TicketDAO;
 import dao.UserDAO;
+import java.awt.Image;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import model.TicketModel;
 import model.UserModel;
@@ -40,6 +42,9 @@ public class Frame_CreateDeliveryOrder extends javax.swing.JFrame {
         this.formDeliveryOrders = formDeliveryOrders;
         this.home = home;
         initComponents();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/asset/inv2.png"));
+        Image image = icon.getImage();
+        setIconImage(image);
         
         //Load Ticket List ComboBox
         ticketDAO = new TicketDAO(home);

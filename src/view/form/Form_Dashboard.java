@@ -1,5 +1,7 @@
 package view.form;
 
+import controller.DashboardController;
+import javax.swing.JTable;
 import model.UserModel;
 import view.card.ModelCard;
 
@@ -16,28 +18,30 @@ public final class Form_Dashboard extends javax.swing.JPanel {
         
         init();
     }
+    
+    public JTable getDataTable() {
+        return jTableDashboard;
+    }
+    
+    public void setColumnWidths() {
+    // Tentukan ukuran kolom yang diinginkan (lebar dalam piksel)
+    int[] columnWidths = {70};
+
+    for (int i = 0; i < columnWidths.length; i++) {
+        if (columnWidths[i] > 0) {
+            jTableDashboard.getColumnModel().getColumn(i).setPreferredWidth(columnWidths[i]);
+            jTableDashboard.getColumnModel().getColumn(i).setMinWidth(columnWidths[i]);
+            jTableDashboard.getColumnModel().getColumn(i).setMaxWidth(columnWidths[i]);
+        } else {
+            jTableDashboard.getColumnModel().getColumn(i).setMinWidth(0);
+            jTableDashboard.getColumnModel().getColumn(i).setMaxWidth(0);
+            jTableDashboard.getColumnModel().getColumn(i).setWidth(0);
+        }
+    }
+}
 
     private void init() {
-        table.fixTable(jScrollPane1);
-        table.addRow(new Object[]{"1", "Mike Bhand", "mikebhand@gmail.com", "Admin", "25 Apr,2018"});
-        table.addRow(new Object[]{"2", "Andrew Strauss", "andrewstrauss@gmail.com", "Editor", "25 Apr,2018"});
-        table.addRow(new Object[]{"3", "Ross Kopelman", "rosskopelman@gmail.com", "Subscriber", "25 Apr,2018"});
-        table.addRow(new Object[]{"4", "Mike Hussy", "mikehussy@gmail.com", "Admin", "25 Apr,2018"});
-        table.addRow(new Object[]{"5", "Kevin Pietersen", "kevinpietersen@gmail.com", "Admin", "25 Apr,2018"});
-        table.addRow(new Object[]{"6", "Andrew Strauss", "andrewstrauss@gmail.com", "Editor", "25 Apr,2018"});
-        table.addRow(new Object[]{"7", "Ross Kopelman", "rosskopelman@gmail.com", "Subscriber", "25 Apr,2018"});
-        table.addRow(new Object[]{"8", "Mike Hussy", "mikehussy@gmail.com", "Admin", "25 Apr,2018"});
-        table.addRow(new Object[]{"9", "Kevin Pietersen", "kevinpietersen@gmail.com", "Admin", "25 Apr,2018"});
-        table.addRow(new Object[]{"10", "Kevin Pietersen", "kevinpietersen@gmail.com", "Admin", "25 Apr,2018"});
-        table.addRow(new Object[]{"11", "Andrew Strauss", "andrewstrauss@gmail.com", "Editor", "25 Apr,2018"});
-        table.addRow(new Object[]{"12", "Ross Kopelman", "rosskopelman@gmail.com", "Subscriber", "25 Apr,2018"});
-        table.addRow(new Object[]{"13", "Mike Hussy", "mikehussy@gmail.com", "Admin", "25 Apr,2018"});
-        table.addRow(new Object[]{"14", "Kevin Pietersen", "kevinpietersen@gmail.com", "Admin", "25 Apr,2018"});
-
-        //  init card data
-        card1.setData(new ModelCard(null, null, null, "$ 500.00", "Report Income Monthly"));
-        card2.setData(new ModelCard(null, null, null, "$ 800.00", "Report Expense Monthly"));
-        card3.setData(new ModelCard(null, null, null, "$ 300.00", "Report Profit Monthly"));
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -49,7 +53,7 @@ public final class Form_Dashboard extends javax.swing.JPanel {
         card3 = new view.card.Card();
         roundPanel1 = new view.swing.RoundPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        table = new view.swing.table.Table();
+        jTableDashboard = new view.swing.table.Table();
         jPanel1 = new javax.swing.JPanel();
         jLabelNameLogin = new javax.swing.JLabel();
         jLabelRoleLogin = new javax.swing.JLabel();
@@ -70,23 +74,23 @@ public final class Form_Dashboard extends javax.swing.JPanel {
         roundPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         roundPanel1.setRound(10);
 
-        table.setModel(new javax.swing.table.DefaultTableModel(
+        jTableDashboard.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "#", "Name", "Email", "Position", "Date Join"
+                "Ticket ID", "Customer", "Phone", "Engineer", "Problem", "Address", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(table);
+        jScrollPane1.setViewportView(jTableDashboard);
 
         javax.swing.GroupLayout roundPanel1Layout = new javax.swing.GroupLayout(roundPanel1);
         roundPanel1.setLayout(roundPanel1Layout);
@@ -192,7 +196,9 @@ public final class Form_Dashboard extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshActionPerformed
-
+        DashboardController dashboardController = new DashboardController(this);
+        dashboardController.showDashboardData();
+        dashboardController.setCardTicket();
     }//GEN-LAST:event_jButtonRefreshActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -205,8 +211,8 @@ public final class Form_Dashboard extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelRoleLogin;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private view.swing.table.Table jTableDashboard;
     private view.swing.RoundPanel roundPanel1;
-    private view.swing.table.Table table;
     // End of variables declaration//GEN-END:variables
 
 
@@ -224,6 +230,27 @@ public final class Form_Dashboard extends javax.swing.JPanel {
 
     public void setjLabelRoleLogin(javax.swing.JLabel jLabelRoleLogin) {
         this.jLabelRoleLogin = jLabelRoleLogin;
+    }
+
+    /**
+     * @return the card1
+     */
+    public view.card.Card getCard1() {
+        return card1;
+    }
+
+    /**
+     * @return the card2
+     */
+    public view.card.Card getCard2() {
+        return card2;
+    }
+
+    /**
+     * @return the card3
+     */
+    public view.card.Card getCard3() {
+        return card3;
     }
 
     

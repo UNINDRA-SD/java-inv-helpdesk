@@ -5,6 +5,8 @@
 package view;
 
 import controller.UserController;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import view.form.Form_Users;
 import view.main.Home;
 
@@ -24,6 +26,9 @@ public class Frame_CreateUser extends javax.swing.JFrame {
         this.formUsers = formUsers;
         this.home = home;
         initComponents();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/asset/inv2.png"));
+        Image image = icon.getImage();
+        setIconImage(image);
         
         jLabelId.setVisible(false);
     }

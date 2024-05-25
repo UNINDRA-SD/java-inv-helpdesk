@@ -6,8 +6,10 @@ package view;
 
 import controller.ActivityReportController;
 import dao.DeliveryOrderDAO;
+import java.awt.Image;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import model.DeliveryOrderModel;
 import view.form.Form_ActivityReports;
@@ -35,7 +37,9 @@ public class Frame_CreateActivityReport extends javax.swing.JFrame {
         this.formActivityReports = formActivityReports;
         this.home = home;
         initComponents();
-        
+        ImageIcon icon = new ImageIcon(getClass().getResource("/asset/inv2.png"));
+        Image image = icon.getImage();
+        setIconImage(image);
         
         //Load DO List ComboBox
         deliveryorderDAO = new DeliveryOrderDAO(home);

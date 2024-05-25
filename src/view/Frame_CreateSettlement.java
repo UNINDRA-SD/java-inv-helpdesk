@@ -6,8 +6,10 @@ package view;
 
 import controller.DOSettlementController;
 import dao.ActivityReportDAO;
+import java.awt.Image;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import model.ActivityReportModel;
@@ -36,6 +38,9 @@ public class Frame_CreateSettlement extends javax.swing.JFrame {
         this.home = home;
         this.doId = doId;
         initComponents();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/asset/inv2.png"));
+        Image image = icon.getImage();
+        setIconImage(image);
 
         // Load Activity Report List ComboBox
         new Thread(() -> {

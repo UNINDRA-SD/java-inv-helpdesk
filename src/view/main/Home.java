@@ -6,12 +6,15 @@ import controller.AssetReportController;
 import controller.BrandController;
 import controller.CategoryController;
 import controller.CustomerController;
+import controller.DashboardController;
 import controller.DeliveryOrderController;
 import controller.RackController;
 import controller.SummaryReportController;
 import controller.TicketController;
 import controller.UserController;
 import java.awt.Component;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import model.UserModel;
 import view.form.Form_ActivityReports;
 import view.form.Form_AssetReports;
@@ -27,11 +30,19 @@ import view.form.Form_DeliveryOrders;
 import view.form.Form_Racks;
 import view.form.Form_SummaryReports;
 import view.form.Form_Tickets;
+import view.form.Form_Unauthorized;
 
 public class Home extends javax.swing.JFrame {
     
     private static Home main;
     private UserModel userLogin;
+    
+    // Form Unauthorized
+    Form_Unauthorized formUnauthorized;
+    
+    //  Form Dashboard
+    DashboardController dashboardController;
+    Form_Dashboard formDashboard;
     
     //  Form Users
     UserController userController;
@@ -79,6 +90,15 @@ public class Home extends javax.swing.JFrame {
        
     public Home(UserModel userLogin) {
         this.userLogin = userLogin;
+        
+        // Form Unauthorized
+        formUnauthorized = new Form_Unauthorized(userLogin);
+        
+        // Form Dashboard
+        formDashboard = new Form_Dashboard(userLogin); 
+        dashboardController = new DashboardController(formDashboard);
+        dashboardController.showDashboardData();
+        dashboardController.setCardTicket();
         
         // Form Users
         formUsers = new Form_Users(userLogin); 
@@ -139,6 +159,9 @@ public class Home extends javax.swing.JFrame {
 
         initComponents();
         init();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/asset/inv2.png"));
+        Image image = icon.getImage();
+        setIconImage(image);
     }
     
     private void init() {
@@ -148,20 +171,43 @@ public class Home extends javax.swing.JFrame {
             @Override
             public void menuSelected(int index, int indexSubMenu) {
                 if (index == 0 && indexSubMenu == 0) {
-                    showForm(new Form_Dashboard(userLogin));
-                    
+                    showForm(formDashboard);
                 } else if(index == 1 && indexSubMenu == 0) {
-                    showForm(formUsers);
+                    if(userLogin.getRole().equalsIgnoreCase("management")) {
+                        showForm(formUsers);
+                    } else {
+                        showForm(formUnauthorized);
+                    }
                 } else if(index == 2 && indexSubMenu == 1) {
-                    showForm(formBrands);
+                    if(userLogin.getRole().equalsIgnoreCase("management")) {
+                        showForm(formBrands);
+                    } else {
+                        showForm(formUnauthorized);
+                    }
                 } else if(index == 2 && indexSubMenu == 2) {
-                    showForm(formCategories);
+                    if(userLogin.getRole().equalsIgnoreCase("management")) {
+                        showForm(formCategories);
+                    } else {
+                        showForm(formUnauthorized);
+                    }
                 } else if(index == 2 && indexSubMenu == 3) {
-                    showForm(formRacks);
+                    if(userLogin.getRole().equalsIgnoreCase("management")) {
+                        showForm(formRacks);
+                    } else {
+                        showForm(formUnauthorized);
+                    }
                 } else if(index == 3 && indexSubMenu == 1) {
-                    showForm(formSummaryReport);
+                    if(userLogin.getRole().equalsIgnoreCase("management")) {
+                        showForm(formSummaryReport);
+                    } else {
+                        showForm(formUnauthorized);
+                    }
                 } else if(index == 3 && indexSubMenu == 2) {
-                    showForm(formAssetReports);
+                    if(userLogin.getRole().equalsIgnoreCase("management")) {
+                        showForm(formAssetReports);
+                    } else {
+                        showForm(formUnauthorized);
+                    }
                 } else if(index == 4 && indexSubMenu == 0) {
                     showForm(formCustomers);
                 } else if(index == 5 && indexSubMenu == 0) {

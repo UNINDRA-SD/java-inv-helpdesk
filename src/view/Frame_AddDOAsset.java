@@ -6,8 +6,10 @@ package view;
 
 import controller.DOAssetController;
 import dao.AssetDAO;
+import java.awt.Image;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import model.AssetModel;
 import view.main.Home;
@@ -33,6 +35,9 @@ public class Frame_AddDOAsset extends javax.swing.JFrame {
         this.frameDetailDeliveryOrder = frameDetailDeliveryOrder;
         this.home = home;
         initComponents();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/asset/inv2.png"));
+        Image image = icon.getImage();
+        setIconImage(image);
         
         //Load Ticket List ComboBox
         assetDAO = new AssetDAO();

@@ -213,7 +213,7 @@
                   <StringArray count="4">
                     <StringItem index="0" value="Open"/>
                     <StringItem index="1" value="Pending"/>
-                    <StringItem index="2" value="On Progress"/>
+                    <StringItem index="2" value="Progress"/>
                     <StringItem index="3" value="Close"/>
                   </StringArray>
                 </Property>

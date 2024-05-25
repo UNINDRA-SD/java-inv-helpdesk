@@ -6,6 +6,8 @@ package view;
 
 import controller.DOAssetController;
 import controller.DOSettlementController;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -33,6 +35,9 @@ public class Frame_DetailDeliveryOrder extends javax.swing.JFrame {
         this.formDeliveryOrders = formDeliveryOrders;
         this.home = home;
         initComponents();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/asset/inv2.png"));
+        Image image = icon.getImage();
+        setIconImage(image);
         
         jLabelId.setVisible(false);
     }
