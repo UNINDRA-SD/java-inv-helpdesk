@@ -74,10 +74,49 @@ public class DOSettlementDAO {
         return isSuccess;
     }
     
-    public void updateStatusByDoAssetId(int id) {
-        String query = "UPDATE do_assets SET status='Installed' WHERE id=?";
+    public boolean updateSettlement(DOSettlementModel requestSettlement) {
+        boolean isSuccess;
+        
+        try{
+            var query = "UPDATE do_settlements SET do_asset_id=?, activity_Report_id=?, fault_model_number=?, fault_part_number=?, fault_serial_number=?, fault_name=?, fault_qty=?, notes=? WHERE id=?";
+            PreparedStatement stmt = sql.prepareStatement(query);
+            
+            stmt.setInt(1,requestSettlement.getDoAssetId());
+            stmt.setInt(2,requestSettlement.getActivityReportId());
+            stmt.setString(3,requestSettlement.getFaultModelNumber());
+            stmt.setString(4,requestSettlement.getFaultModelNumber());
+            stmt.setString(5,requestSettlement.getFaultSerialNumber());
+            stmt.setString(6,requestSettlement.getFaultName());
+            stmt.setInt(7,requestSettlement.getFaultQty());
+            stmt.setString(8,requestSettlement.getNotes());
+            stmt.setInt(9,requestSettlement.getId());
+            stmt.executeUpdate();
+            stmt.close();
+            isSuccess = true;
+            
+        }catch(SQLException err){
+            System.out.println(err);
+            isSuccess = false;
+        }
+        return isSuccess;
+    }
+    
+    public void updateStatusAndQtyByDoAssetId(int qty, int id) {
+        String query = "UPDATE do_assets SET status='Installed', qty=? WHERE id=?";
         try (PreparedStatement stmt = sql.prepareStatement(query)) {
-            stmt.setInt(1, id);
+            stmt.setInt(1, qty);
+            stmt.setInt(2, id);
+            stmt.executeUpdate();
+        } catch (SQLException err) {
+            System.out.println(err);
+        }
+    }
+    
+    public void updateStockAssetId(int qty, int id) {
+        String query = "UPDATE assets SET qty=qty+? WHERE id=?";
+        try (PreparedStatement stmt = sql.prepareStatement(query)) {
+            stmt.setInt(1, qty);
+            stmt.setInt(2, id);
             stmt.executeUpdate();
         } catch (SQLException err) {
             System.out.println(err);

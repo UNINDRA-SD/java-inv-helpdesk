@@ -2,6 +2,7 @@ package view.form;
 
 import controller.DOAssetController;
 import controller.DeliveryOrderController;
+import dao.DeliveryOrderDAO;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -289,14 +290,17 @@ public class Form_DeliveryOrders extends javax.swing.JPanel {
             detailDeliveryOrderView.getjTextTicketId().setText(ticketIdString);
             detailDeliveryOrderView.getjTextTeamWarehouse().setText((String) jTableDeliveryOrders.getValueAt(jTableDeliveryOrders.getSelectedRow(),2));
             
-            
-            DeliveryOrderModel deliveryOrder = new DeliveryOrderModel();
-            String ticketStatus = deliveryOrder.getTicketStatusById(Integer.parseInt(ticketIdString));
-            String customerName = deliveryOrder.getCustomerNameByTicketId(Integer.parseInt(ticketIdString));
-            String ticketProblem = deliveryOrder.getTicketProblemById(Integer.parseInt(ticketIdString));
-            String ticketDescription = deliveryOrder.getTicketDescriptionById(Integer.parseInt(ticketIdString));
-            String ticketEngineer = deliveryOrder.getEngineerNameByTicketId(Integer.parseInt(ticketIdString));
-            String customerDescription = deliveryOrder.getCustomerDescriptionByTicketId(Integer.parseInt(ticketIdString));
+            int ticketId = Integer.parseInt(ticketIdString);
+            DeliveryOrderDAO deliveryOrderDAO = new DeliveryOrderDAO(home);
+            DeliveryOrderModel deliveryOrder = deliveryOrderDAO.getTicketDetailsById(ticketId);
+            String ticketStatus = deliveryOrder.getStatus();
+            String ticketProblem = deliveryOrder.getProblem();
+            String ticketDescription = deliveryOrder.getDescription();
+            String customerName = deliveryOrder.getCustomerName();
+            String customerDescription = deliveryOrder.getCustomerDescription();
+            String customerPhone = deliveryOrder.getCustomerPhone();
+            String customerAddress = deliveryOrder.getCustomerAddress();
+            String ticketEngineer = deliveryOrder.getEngineerName();
             
             detailDeliveryOrderView.getjTextTicketStatus().setText(ticketStatus);
             detailDeliveryOrderView.getjTextCustomerName().setText(customerName);
@@ -304,6 +308,8 @@ public class Form_DeliveryOrders extends javax.swing.JPanel {
             detailDeliveryOrderView.getjTextTeamEngineer().setText(ticketEngineer);
             detailDeliveryOrderView.getjTextTicketDescription().setText(ticketDescription);
             detailDeliveryOrderView.getjTextCustomerDescription().setText(customerDescription);
+            detailDeliveryOrderView.getjLabelPhone().setText(customerPhone);
+            detailDeliveryOrderView.getjLabelAddress().setText(customerAddress);
             
             
             int doId = Integer.parseInt(doIdString);

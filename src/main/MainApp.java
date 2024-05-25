@@ -5,8 +5,6 @@
 package main;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
-import javax.swing.UIManager;
-import view.system.SystemColor;
 import view.Frame_Login;
 
 /**

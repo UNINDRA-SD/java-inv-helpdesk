@@ -2,16 +2,19 @@ package view.main;
 
 import controller.ActivityReportController;
 import controller.AssetController;
+import controller.AssetReportController;
 import controller.BrandController;
 import controller.CategoryController;
 import controller.CustomerController;
 import controller.DeliveryOrderController;
 import controller.RackController;
+import controller.SummaryReportController;
 import controller.TicketController;
 import controller.UserController;
 import java.awt.Component;
 import model.UserModel;
 import view.form.Form_ActivityReports;
+import view.form.Form_AssetReports;
 import view.form.Form_Assets;
 import view.form.Form_Brands;
 import view.form.Form_Dashboard;
@@ -22,6 +25,7 @@ import view.form.Form_Customers;
 import view.form.Form_Categories;
 import view.form.Form_DeliveryOrders;
 import view.form.Form_Racks;
+import view.form.Form_SummaryReports;
 import view.form.Form_Tickets;
 
 public class Home extends javax.swing.JFrame {
@@ -29,86 +33,106 @@ public class Home extends javax.swing.JFrame {
     private static Home main;
     private UserModel userLogin;
     
-//  Form Users
+    //  Form Users
     UserController userController;
     Form_Users formUsers;
     
-//  Form Brands
+    //  Form Brands
     BrandController brandController;
     Form_Brands formBrands;
     
-//  Form Categories
+    //  Form Categories
     CategoryController categoryController;
     Form_Categories formCategories;
     
-//  Form Racks
+    //  Form Racks
     RackController rackController;
     Form_Racks formRacks;
+
+    // Form Summary Report
+    SummaryReportController summaryReportController;
+    Form_SummaryReports formSummaryReport;
     
-//  Form Customers
+    // Form Asset Report
+    AssetReportController assetReportController;
+    Form_AssetReports formAssetReports;
+    
+    //  Form Customers
     CustomerController customerController;
     Form_Customers formCustomers;
 
-//  Form Tickets
+    //  Form Tickets
     TicketController ticketController;
     Form_Tickets formTickets;
     
-//  Form Assets
+    //  Form Assets
     AssetController assetController;
     Form_Assets formAssets;
     
-//  Form Delivery Orders
+    //  Form Delivery Orders
     DeliveryOrderController deliveryOrderController;
     Form_DeliveryOrders formDeliveryOrders;
 
-//  Activity Reports
+    //  Activity Reports
     ActivityReportController activityReportController;
     Form_ActivityReports formActivityReports;
        
     public Home(UserModel userLogin) {
         this.userLogin = userLogin;
         
-//        Form Users
+        // Form Users
         formUsers = new Form_Users(userLogin); 
         userController = new UserController(formUsers, this);
         userController.showUsers();
         
-//        Form Brands
+        // Form Brands
         formBrands = new Form_Brands(userLogin);
         brandController = new BrandController(formBrands, this);
         brandController.showBrands();
         
-//        Form Categories
+        // Form Categories
         formCategories = new Form_Categories(userLogin);
         categoryController = new CategoryController(formCategories, this);
         categoryController.showCategories();
         
-//        Form Racks
+        // Form Racks
         formRacks = new Form_Racks(userLogin);
         rackController = new RackController(formRacks, this);
         rackController.showRacks();
 
-//        Form Customers
+        // Form Summary Report
+        formSummaryReport = new Form_SummaryReports(userLogin);
+        summaryReportController = new SummaryReportController(formSummaryReport, this);
+        summaryReportController.showSummaryReport();
+        summaryReportController.setCardTicket();
+        
+        // Form Asset Report
+        formAssetReports = new Form_AssetReports(userLogin);
+        assetReportController = new AssetReportController(formAssetReports, this);
+        assetReportController.showAvailableStockSummary();
+        assetReportController.showNeedToRestockSummary();
+
+        // Form Customers
         formCustomers = new Form_Customers(userLogin);
         customerController = new CustomerController(formCustomers, this);
         customerController.showCustomers();
 
-        //Form Tickets
+        // Form Tickets
         formTickets = new Form_Tickets(userLogin);
         ticketController = new TicketController(formTickets, this);
         ticketController.showTickets();
         
-//      Form Assets
+        // Form Assets
         formAssets = new Form_Assets(userLogin);
         assetController = new AssetController(formAssets);
         assetController.showAssets();
         
-//      Form Delivery Orders
+        // Form Delivery Orders
         formDeliveryOrders = new Form_DeliveryOrders(userLogin);
         deliveryOrderController = new DeliveryOrderController(formDeliveryOrders, this);
         deliveryOrderController.showDeliveryOrders();
 
-//      Form Delivery Orders
+        // Form Delivery Orders
         formActivityReports = new Form_ActivityReports(userLogin);
         activityReportController = new ActivityReportController(formActivityReports, this);
         activityReportController.showActivityReports();
@@ -133,16 +157,20 @@ public class Home extends javax.swing.JFrame {
                 } else if(index == 2 && indexSubMenu == 2) {
                     showForm(formCategories);
                 } else if(index == 2 && indexSubMenu == 3) {
-                    showForm(formRacks);    
-                } else if(index == 3 && indexSubMenu == 0) {
-                    showForm(formCustomers);
+                    showForm(formRacks);
+                } else if(index == 3 && indexSubMenu == 1) {
+                    showForm(formSummaryReport);
+                } else if(index == 3 && indexSubMenu == 2) {
+                    showForm(formAssetReports);
                 } else if(index == 4 && indexSubMenu == 0) {
-                    showForm(formTickets);
+                    showForm(formCustomers);
                 } else if(index == 5 && indexSubMenu == 0) {
-                    showForm(formAssets);
+                    showForm(formTickets);
                 } else if(index == 6 && indexSubMenu == 0) {
-                    showForm(formDeliveryOrders);
+                    showForm(formAssets);
                 } else if(index == 7 && indexSubMenu == 0) {
+                    showForm(formDeliveryOrders);
+                } else if(index == 8 && indexSubMenu == 0) {
                     showForm(formActivityReports);
                 }
                 else {
