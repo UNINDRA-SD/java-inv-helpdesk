@@ -8,8 +8,10 @@ import controller.AssetController;
 import dao.BrandDAO;
 import dao.CategoryDAO;
 import dao.RackDAO;
+import java.awt.Image;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import model.BrandModel;
 import model.CategoryModel;
@@ -45,6 +47,9 @@ public class Frame_CreateAsset extends javax.swing.JFrame {
         this.formAssets = formAssets;
         this.home = home;
         initComponents();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/asset/inv2.png"));
+        Image image = icon.getImage();
+        setIconImage(image);
         
         //Load Brand List ComboBox
         brandDAO = new BrandDAO(home);

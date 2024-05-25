@@ -5,6 +5,8 @@
 package view;
 
 import controller.ActivityReportController;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import view.form.Form_ActivityReports;
 import view.main.Home;
@@ -27,6 +29,9 @@ public class Frame_DetailActivityReport extends javax.swing.JFrame {
         this.formActivityReports = formActivityReports;
         this.home = home;
         initComponents();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/asset/inv2.png"));
+        Image image = icon.getImage();
+        setIconImage(image);
         
         jLabelId.setVisible(false);
     }

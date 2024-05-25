@@ -5,6 +5,8 @@
 package view;
 
 import controller.LoginController;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -21,6 +23,9 @@ public class Frame_Login extends javax.swing.JFrame {
     
     public Frame_Login() {
         initComponents();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/asset/inv2.png"));
+        Image image = icon.getImage();
+        setIconImage(image);
     }
 
     /**

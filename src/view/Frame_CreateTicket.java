@@ -7,8 +7,10 @@ package view;
 import controller.TicketController;
 import dao.CustomerDAO;
 import dao.UserDAO;
+import java.awt.Image;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import model.CustomerModel;
 import model.UserModel;
@@ -40,6 +42,9 @@ public class Frame_CreateTicket extends javax.swing.JFrame {
         this.formTickets = formTickets;
         this.home = home;
         initComponents();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/asset/inv2.png"));
+        Image image = icon.getImage();
+        setIconImage(image);
         
         //Load Customer List ComboBox
         customerDAO = new CustomerDAO(home);
@@ -125,7 +130,7 @@ public class Frame_CreateTicket extends javax.swing.JFrame {
 
         jLabelStatus.setText("Status");
 
-        jComboStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Open", "Pending", "On Progress", "Close" }));
+        jComboStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Open", "Pending", "Progress", "Close" }));
 
         jLabelProblem.setText("Problem");
 
