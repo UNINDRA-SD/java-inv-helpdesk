@@ -100,6 +100,7 @@ public class Frame_CreateSettlement extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextNotes = new javax.swing.JTextArea();
+        jLabelDOQty = new javax.swing.JLabel();
         jButtonCancel = new javax.swing.JButton();
         jButtonSave = new javax.swing.JButton();
         jLabelId = new javax.swing.JLabel();
@@ -110,14 +111,14 @@ public class Frame_CreateSettlement extends javax.swing.JFrame {
         jDesktopPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(143, 148, 251), 10));
 
         jLabelTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabelTitle.setText("Create Asset Replacement");
+        jLabelTitle.setText("Create Asset Settlement");
 
         jLabelDOId.setText("Activity Report ID");
 
         jComboActivityReportId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabelStartDate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabelStartDate.setText("# Deliver Asset Info");
+        jLabelStartDate.setText("# Installed Asset Info");
 
         jLabel1.setText("DO Asset ID / Asset ID");
 
@@ -148,13 +149,26 @@ public class Frame_CreateSettlement extends javax.swing.JFrame {
 
         jTextName.setEditable(false);
 
-        jTextQty.setEditable(false);
+        jTextQty.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextQtyKeyTyped(evt);
+            }
+        });
 
-        jLabel10.setText("Notes");
+        jTextFaultyQty.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFaultyQtyKeyTyped(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel10.setText("# Settlement Notes");
 
         jTextNotes.setColumns(20);
         jTextNotes.setRows(5);
         jScrollPane1.setViewportView(jTextNotes);
+
+        jLabelDOQty.setText("DO Qty");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -185,7 +199,9 @@ public class Frame_CreateSettlement extends javax.swing.JFrame {
                                     .addComponent(jTextDOAssetId)
                                     .addComponent(jTextSerialNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                                     .addComponent(jTextName, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                                    .addComponent(jTextQty, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)))))
+                                    .addComponent(jTextQty, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelDOQty))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -200,7 +216,7 @@ public class Frame_CreateSettlement extends javax.swing.JFrame {
                             .addComponent(jTextFaultyModel, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFaultyQty)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))))
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,7 +250,8 @@ public class Frame_CreateSettlement extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextQty, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextQty, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDOQty))
                 .addGap(12, 12, 12)
                 .addComponent(jLabelStartDate1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -342,13 +359,29 @@ public class Frame_CreateSettlement extends javax.swing.JFrame {
         }
         else {
             DOSettlementController doSettlementController = new DOSettlementController();
-//            doSettlementController.updateDOSettlement(this);
+            doSettlementController.updateDOSettlement(this, detailDeliveryOrderView, doId);
         }
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_jButtonCancelActionPerformed
+
+    private void jTextQtyKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextQtyKeyTyped
+        // TODO add your handling code here:
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextQtyKeyTyped
+
+    private void jTextFaultyQtyKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFaultyQtyKeyTyped
+        // TODO add your handling code here:
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFaultyQtyKeyTyped
 
     /**
      * @param args the command line arguments
@@ -404,6 +437,7 @@ public class Frame_CreateSettlement extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelActionTaken;
     private javax.swing.JLabel jLabelDOId;
+    private javax.swing.JLabel jLabelDOQty;
     private javax.swing.JLabel jLabelId;
     private javax.swing.JLabel jLabelStartDate;
     private javax.swing.JLabel jLabelStartDate1;
@@ -525,6 +559,13 @@ public class Frame_CreateSettlement extends javax.swing.JFrame {
      */
     public javax.swing.JComboBox<String> getjComboActivityReportId() {
         return jComboActivityReportId;
+    }
+
+    /**
+     * @return the jLabelDOQty
+     */
+    public javax.swing.JLabel getjLabelDOQty() {
+        return jLabelDOQty;
     }
 
     

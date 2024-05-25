@@ -1,11 +1,14 @@
 package view.form;
 
 import controller.ActivityReportController;
+import dao.ActivityReportDAO;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import model.ActivityReportModel;
 import model.UserModel;
 import view.Frame_CreateActivityReport;
+import view.Frame_DetailActivityReport;
 import view.main.Home;
 
 
@@ -13,6 +16,7 @@ public class Form_ActivityReports extends javax.swing.JPanel {
 
     private UserModel userLogin;
     ActivityReportController activityReportController;
+    Frame_DetailActivityReport detailActivityReport;
     Home home;
     
     Frame_CreateActivityReport createActivityReportView;
@@ -286,44 +290,40 @@ public class Form_ActivityReports extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonDeleteActivityReportActionPerformed
 
     private void jButtonDetailActivityReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDetailActivityReportActionPerformed
-//        if (jTableDeliveryOrders.getSelectedRow() >= 0){
-//            detailDeliveryOrderView = new Frame_DetailDeliveryOrder(this,this.home);
-//            detailDeliveryOrderView.pack();
-//            detailDeliveryOrderView.setLocationRelativeTo(null);
-//            detailDeliveryOrderView.setAlwaysOnTop(true);
-//            detailDeliveryOrderView.getjLabelId().setVisible(false);
-//            
-//            String doIdString = jTableDeliveryOrders.getValueAt(jTableDeliveryOrders.getSelectedRow(), 0).toString();
-//            detailDeliveryOrderView.getjLabelId().setText(doIdString);
-//            String ticketIdString = jTableDeliveryOrders.getValueAt(jTableDeliveryOrders.getSelectedRow(),1).toString();
-//            detailDeliveryOrderView.getjTextTicketId().setText(ticketIdString);
-//            detailDeliveryOrderView.getjTextTeamWarehouse().setText((String) jTableDeliveryOrders.getValueAt(jTableDeliveryOrders.getSelectedRow(),2));
-//            
-//            
-//            DeliveryOrderModel deliveryOrder = new DeliveryOrderModel();
-//            String ticketStatus = deliveryOrder.getTicketStatusById(Integer.parseInt(ticketIdString));
-//            String customerName = deliveryOrder.getCustomerNameByTicketId(Integer.parseInt(ticketIdString));
-//            String ticketProblem = deliveryOrder.getTicketProblemById(Integer.parseInt(ticketIdString));
-//            String ticketDescription = deliveryOrder.getTicketDescriptionById(Integer.parseInt(ticketIdString));
-//            String ticketEngineer = deliveryOrder.getEngineerNameByTicketId(Integer.parseInt(ticketIdString));
-//            String customerDescription = deliveryOrder.getCustomerDescriptionByTicketId(Integer.parseInt(ticketIdString));
-//            
-//            detailDeliveryOrderView.getjTextTicketStatus().setText(ticketStatus);
-//            detailDeliveryOrderView.getjTextCustomerName().setText(customerName);
-//            detailDeliveryOrderView.getjTextProblem().setText(ticketProblem);
-//            detailDeliveryOrderView.getjTextTeamEngineer().setText(ticketEngineer);
-//            detailDeliveryOrderView.getjTextTicketDescription().setText(ticketDescription);
-//            detailDeliveryOrderView.getjTextCustomerDescription().setText(customerDescription);
-//            
-//            
-//            int doId = Integer.parseInt(doIdString);
-//            doAssetController = new DOAssetController(detailDeliveryOrderView);
-//            doAssetController.showDOAssets(doId);
-//            
-//            detailDeliveryOrderView.setVisible(true);
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Select one data to show detail!","WARNING",JOptionPane.WARNING_MESSAGE);
-//        }
+        if (jTableActivityReports.getSelectedRow() >= 0){
+            detailActivityReport = new Frame_DetailActivityReport(this,this.home);
+            detailActivityReport.pack();
+            detailActivityReport.setLocationRelativeTo(null);
+            detailActivityReport.setAlwaysOnTop(true);
+            detailActivityReport.getjLabelId().setVisible(false);
+            
+            String actRepId = jTableActivityReports.getValueAt(jTableActivityReports.getSelectedRow(), 0).toString();
+            int actRepIdInt = Integer.parseInt(actRepId);
+
+            ActivityReportDAO activityReportDAO = new ActivityReportDAO(home);
+            ActivityReportModel activityReport = activityReportDAO.getActivityReportDetailsById(actRepIdInt);
+
+            detailActivityReport.getjLabelId().setText(actRepId);
+            detailActivityReport.getjTextDOTicket().setText(String.valueOf(activityReport.getDeliveryOrderId() + " / " + activityReport.getTicketId()));
+            detailActivityReport.getjTextActionTaken().setText(activityReport.getActionTaken());
+
+            detailActivityReport.getjTextEngineer().setText(activityReport.getEngineerName());
+            detailActivityReport.getjTextProblem().setText(activityReport.getProblem());
+            detailActivityReport.getjTextTicketDescription().setText(activityReport.getTicketDescription());
+            detailActivityReport.getjTextCustomer().setText(activityReport.getCustomerName());
+            detailActivityReport.getjTextPhone().setText(activityReport.getCustomerPhone());
+            detailActivityReport.getjTextDescription().setText(activityReport.getCustomerDescription());
+            detailActivityReport.getjTextAddress().setText(activityReport.getCustomerAddress());
+            detailActivityReport.getjTextStartDate().setText(activityReport.getStartDate());
+            detailActivityReport.getjTextEndDate().setText(activityReport.getEndDate());
+            detailActivityReport.getjTextStartTime().setText(activityReport.getStartTime());
+            detailActivityReport.getjTextEndTime().setText(activityReport.getEndTime());
+
+            
+            detailActivityReport.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Select one data to show detail!","WARNING",JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonDetailActivityReportActionPerformed
 
     

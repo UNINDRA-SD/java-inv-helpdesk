@@ -118,4 +118,43 @@ public class DeliveryOrderDAO {
             JOptionPane.showMessageDialog(null,"Data failed to be delete!","ERROR",JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    public DeliveryOrderModel getTicketDetailsById(int ticketId) {
+        DeliveryOrderModel deliveryOrder = new DeliveryOrderModel();
+
+        try {
+            String query = "SELECT t.id, t.status, t.problem, t.description, " +
+                           "c.name AS customer_name, c.description AS customer_description, " +
+                           "c.phone AS customer_phone, c.address AS customer_address, " +
+                           "u.name AS engineer_name " +
+                           "FROM tickets t " +
+                           "JOIN customers c ON t.customer_id = c.id " +
+                           "JOIN users u ON t.user_id = u.id " +
+                           "WHERE t.id = ?";
+
+            PreparedStatement stmt = sql.prepareStatement(query);
+            stmt.setInt(1, ticketId);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                deliveryOrder.setId(rs.getInt("id"));
+                deliveryOrder.setStatus(rs.getString("status"));
+                deliveryOrder.setProblem(rs.getString("problem"));
+                deliveryOrder.setDescription(rs.getString("description"));
+                deliveryOrder.setCustomerName(rs.getString("customer_name"));
+                deliveryOrder.setCustomerDescription(rs.getString("customer_description"));
+                deliveryOrder.setCustomerPhone(rs.getString("customer_phone"));
+                deliveryOrder.setCustomerAddress(rs.getString("customer_address"));
+                deliveryOrder.setEngineerName(rs.getString("engineer_name"));
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException err) {
+            System.out.println(err);
+        }
+
+        return deliveryOrder;
+    }
 }

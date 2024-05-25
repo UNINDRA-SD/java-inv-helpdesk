@@ -16,6 +16,16 @@ public class ActivityReportModel {
     private String endDate;
     private String startTime;
     private String endTime;
+    
+    // Add additional fields for details
+    private String engineerName;
+    private String problem;
+    private int ticketId;
+    private String ticketDescription;
+    private String customerName;
+    private String customerPhone;
+    private String customerDescription;
+    private String customerAddress;
 
     /**
      * @return the id
@@ -113,6 +123,118 @@ public class ActivityReportModel {
      */
     public void setEndTime(String endTime) {
         this.endTime = endTime;
+    }
+
+    /**
+     * @return the engineerName
+     */
+    public String getEngineerName() {
+        return engineerName;
+    }
+
+    /**
+     * @param engineerName the engineerName to set
+     */
+    public void setEngineerName(String engineerName) {
+        this.engineerName = engineerName;
+    }
+
+    /**
+     * @return the problem
+     */
+    public String getProblem() {
+        return problem;
+    }
+
+    /**
+     * @param problem the problem to set
+     */
+    public void setProblem(String problem) {
+        this.problem = problem;
+    }
+
+    /**
+     * @return the ticketDescription
+     */
+    public String getTicketDescription() {
+        return ticketDescription;
+    }
+
+    /**
+     * @param ticketDescription the ticketDescription to set
+     */
+    public void setTicketDescription(String ticketDescription) {
+        this.ticketDescription = ticketDescription;
+    }
+
+    /**
+     * @return the customerName
+     */
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    /**
+     * @param customerName the customerName to set
+     */
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    /**
+     * @return the customerPhone
+     */
+    public String getCustomerPhone() {
+        return customerPhone;
+    }
+
+    /**
+     * @param customerPhone the customerPhone to set
+     */
+    public void setCustomerPhone(String customerPhone) {
+        this.customerPhone = customerPhone;
+    }
+
+    /**
+     * @return the customerDescription
+     */
+    public String getCustomerDescription() {
+        return customerDescription;
+    }
+
+    /**
+     * @param customerDescription the customerDescription to set
+     */
+    public void setCustomerDescription(String customerDescription) {
+        this.customerDescription = customerDescription;
+    }
+
+    /**
+     * @return the customerAddress
+     */
+    public String getCustomerAddress() {
+        return customerAddress;
+    }
+
+    /**
+     * @param customerAddress the customerAddress to set
+     */
+    public void setCustomerAddress(String customerAddress) {
+        this.customerAddress = customerAddress;
+    }
+
+    /**
+     * @return the ticketId
+     */
+    public int getTicketId() {
+        return ticketId;
+    }
+
+    /**
+     * @param ticketId the ticketId to set
+     */
+    public void setTicketId(int ticketId) {
+        this.ticketId = ticketId;
     }
     
     

@@ -37,6 +37,7 @@ public class Menu extends JPanel {
         addTitle("MANAGEMENT");
         addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.PEOPLE, "Users"));
         addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.LIBRARY_BOOKS, "Master Warehouse", "Brands", "Categories", "Racks"));
+        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.RECEIPT, "Reports", "Summary Report", "Assets Report"));
 //        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.MESSAGE, "Chat"));
 //        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.PERM_CONTACT_CALENDAR, "Calendar"));
         addTitle("CLIENT");

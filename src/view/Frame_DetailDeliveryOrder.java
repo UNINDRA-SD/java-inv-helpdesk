@@ -50,6 +50,8 @@ public class Frame_DetailDeliveryOrder extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabelPhone = new javax.swing.JLabel();
+        jLabelAddress = new javax.swing.JLabel();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jLabelTitle = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -74,11 +76,15 @@ public class Frame_DetailDeliveryOrder extends javax.swing.JFrame {
         jTextCustomerDescription = new javax.swing.JTextArea();
         jTextTeamWarehouse = new javax.swing.JTextField();
         jTextTeamEngineer = new javax.swing.JTextField();
-        jButtonReplaceAsset = new javax.swing.JButton();
+        jButtonSettleAsset = new javax.swing.JButton();
         jTextCustomerName = new javax.swing.JTextField();
         jButtonCancel = new javax.swing.JButton();
         jButtonPrintDO = new javax.swing.JButton();
         jLabelId = new javax.swing.JLabel();
+
+        jLabelPhone.setText("jLabel5");
+
+        jLabelAddress.setText("jLabel5");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -153,11 +159,11 @@ public class Frame_DetailDeliveryOrder extends javax.swing.JFrame {
 
         jTextTeamEngineer.setEditable(false);
 
-        jButtonReplaceAsset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/folder_go.png"))); // NOI18N
-        jButtonReplaceAsset.setText("Settle Asset");
-        jButtonReplaceAsset.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSettleAsset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/folder_go.png"))); // NOI18N
+        jButtonSettleAsset.setText("Settle Asset");
+        jButtonSettleAsset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonReplaceAssetActionPerformed(evt);
+                jButtonSettleAssetActionPerformed(evt);
             }
         });
 
@@ -175,7 +181,7 @@ public class Frame_DetailDeliveryOrder extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButtonDeleteAsset)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonReplaceAsset, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonSettleAsset, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane2)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -244,7 +250,7 @@ public class Frame_DetailDeliveryOrder extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonAddAsset)
                             .addComponent(jButtonDeleteAsset)
-                            .addComponent(jButtonReplaceAsset)))
+                            .addComponent(jButtonSettleAsset)))
                     .addComponent(jLabelDescription1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -332,7 +338,8 @@ public class Frame_DetailDeliveryOrder extends javax.swing.JFrame {
         JFileChooser chooser = new JFileChooser("");
         int r = chooser.showSaveDialog(this);
         if (r == JFileChooser.APPROVE_OPTION) {
-        String dir = chooser.getSelectedFile().getAbsolutePath();
+            String dir = chooser.getSelectedFile().getAbsolutePath();
+            doAssetController = new DOAssetController(this);
             doAssetController.printDO(this, dir);
         }
     }//GEN-LAST:event_jButtonPrintDOActionPerformed
@@ -367,7 +374,7 @@ public class Frame_DetailDeliveryOrder extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonDeleteAssetActionPerformed
 
-    private void jButtonReplaceAssetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReplaceAssetActionPerformed
+    private void jButtonSettleAssetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSettleAssetActionPerformed
         // TODO add your handling code here:
         int doId = Integer.parseInt(getjLabelId().getText());
         if (jTableDOAssets.getSelectedRow() >= 0){
@@ -388,11 +395,12 @@ public class Frame_DetailDeliveryOrder extends javax.swing.JFrame {
                 createSettlementView.setVisible(true);
                 createSettlementView.setAlwaysOnTop(true);
                 createSettlementView.getjLabelId().setText(Integer.toString(doSettlementId));
-                createSettlementView.getjTextDOAssetId().setText(id + " / " + assetId);
+                createSettlementView.getjTextDOAssetId().setText(id + " | " + assetId);
                 createSettlementView.getjTextModelNumber().setText(model);
                 createSettlementView.getjTextSerialNumber().setText(serialNumber);
                 createSettlementView.getjTextName().setText(name);
                 createSettlementView.getjTextQty().setText(qty);
+                createSettlementView.getjLabelDOQty().setText(qty);
                 
                 // get data
                 DOSettlementController doSettlementController = new DOSettlementController();
@@ -413,11 +421,12 @@ public class Frame_DetailDeliveryOrder extends javax.swing.JFrame {
                 createSettlementView.getjTextSerialNumber().setText(serialNumber);
                 createSettlementView.getjTextName().setText(name);
                 createSettlementView.getjTextQty().setText(qty);
+                createSettlementView.getjLabelDOQty().setText(qty);
             }
         } else {
             JOptionPane.showMessageDialog(this, "Select one data to create replacement!","WARNING",JOptionPane.WARNING_MESSAGE);
         }
-    }//GEN-LAST:event_jButtonReplaceAssetActionPerformed
+    }//GEN-LAST:event_jButtonSettleAssetActionPerformed
 
     /**
      * @param args the command line arguments
@@ -461,15 +470,17 @@ public class Frame_DetailDeliveryOrder extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonDeleteAsset;
     private javax.swing.JButton jButtonPrintDO;
-    private javax.swing.JButton jButtonReplaceAsset;
+    private javax.swing.JButton jButtonSettleAsset;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelAddress;
     private javax.swing.JLabel jLabelDescription;
     private javax.swing.JLabel jLabelDescription1;
     private javax.swing.JLabel jLabelId;
+    private javax.swing.JLabel jLabelPhone;
     private javax.swing.JLabel jLabelTeamWH;
     private javax.swing.JLabel jLabelTicketId;
     private javax.swing.JLabel jLabelTitle;
@@ -603,6 +614,20 @@ public class Frame_DetailDeliveryOrder extends javax.swing.JFrame {
         table.getColumnModel().getColumn(8).setMinWidth(0);
         table.getColumnModel().getColumn(8).setMaxWidth(0);
         table.getColumnModel().getColumn(8).setWidth(0);
+    }
+
+    /**
+     * @return the jLabelAddress
+     */
+    public javax.swing.JLabel getjLabelAddress() {
+        return jLabelAddress;
+    }
+
+    /**
+     * @return the jLabelPhone
+     */
+    public javax.swing.JLabel getjLabelPhone() {
+        return jLabelPhone;
     }
 
 

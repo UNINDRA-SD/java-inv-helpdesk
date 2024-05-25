@@ -131,4 +131,55 @@ public class ActivityReportDAO {
             JOptionPane.showMessageDialog(null,"Data failed to be delete!","ERROR",JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    public ActivityReportModel getActivityReportDetailsById(int actRepId) {
+        ActivityReportModel activityReport = new ActivityReportModel();
+
+        try {
+            String query = "SELECT ar.id, ar.delivery_order_id, ar.action_taken, ar.start_date, ar.end_date, " +
+                           "ar.start_time, ar.end_time, " +
+                           "t.status, t.problem, t.description, t.id AS ticket_id, " +
+                           "u.name AS engineer_name, " +
+                           "c.name AS customer_name, c.phone AS customer_phone, " +
+                           "c.description AS customer_description, c.address AS customer_address " +
+                           "FROM activity_reports ar " +
+                           "JOIN delivery_orders do ON ar.delivery_order_id = do.id " +
+                           "JOIN tickets t ON do.ticket_id = t.id " +
+                           "JOIN users u ON t.user_id = u.id " +
+                           "JOIN customers c ON t.customer_id = c.id " +
+                           "WHERE ar.id = ?";
+
+            PreparedStatement stmt = sql.prepareStatement(query);
+            stmt.setInt(1, actRepId);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                activityReport.setId(rs.getInt("id"));
+                activityReport.setDeliveryOrderId(rs.getInt("delivery_order_id"));
+                activityReport.setActionTaken(rs.getString("action_taken"));
+                activityReport.setStartDate(rs.getString("start_date"));
+                activityReport.setEndDate(rs.getString("end_date"));
+                activityReport.setStartTime(rs.getString("start_time"));
+                activityReport.setEndTime(rs.getString("end_time"));
+
+                // Additional fields
+                activityReport.setEngineerName(rs.getString("engineer_name"));
+                activityReport.setProblem(rs.getString("problem"));
+                activityReport.setTicketId(rs.getInt("ticket_id"));
+                activityReport.setTicketDescription(rs.getString("description"));
+                activityReport.setCustomerName(rs.getString("customer_name"));
+                activityReport.setCustomerPhone(rs.getString("customer_phone"));
+                activityReport.setCustomerDescription(rs.getString("customer_description"));
+                activityReport.setCustomerAddress(rs.getString("customer_address"));
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException err) {
+            System.out.println(err);
+        }
+
+        return activityReport;
+    }
 }

@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.JLabel" name="jLabelPhone">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel5"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelAddress">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel5"/>
+      </Properties>
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="resizable" type="boolean" value="false"/>
@@ -115,7 +127,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jButtonDeleteAsset" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jButtonReplaceAsset" min="-2" pref="130" max="-2" attributes="0"/>
+                              <Component id="jButtonSettleAsset" min="-2" pref="130" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
@@ -202,7 +214,7 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jButtonAddAsset" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButtonDeleteAsset" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButtonReplaceAsset" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButtonSettleAsset" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Component id="jLabelDescription1" min="-2" pref="20" max="-2" attributes="0"/>
@@ -394,7 +406,7 @@
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButtonReplaceAsset">
+            <Component class="javax.swing.JButton" name="jButtonSettleAsset">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/asset/folder_go.png"/>
@@ -402,7 +414,7 @@
                 <Property name="text" type="java.lang.String" value="Settle Asset"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonReplaceAssetActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSettleAssetActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextCustomerName">

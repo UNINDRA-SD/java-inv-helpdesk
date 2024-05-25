@@ -21,6 +21,15 @@ public class DeliveryOrderModel {
     private String notes;
     
     Connection sql = MysqlDB.connection();
+    
+    private String status;
+    private String problem;
+    private String description;
+    private String customerName;
+    private String customerDescription;
+    private String customerPhone;
+    private String customerAddress;
+    private String engineerName;
 
     /**
      * @return the id
@@ -41,28 +50,6 @@ public class DeliveryOrderModel {
      */
     public int getTicketId() {
         return ticketId;
-    }
-    
-    public String getTicketStatusById(int ticket) {
-        String ticketStatus = null;
-
-        try {
-            String query = "SELECT status FROM tickets WHERE id=?";
-            PreparedStatement stmt = sql.prepareStatement(query);
-
-            stmt.setInt(1, ticket);
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                ticketStatus = rs.getString("status");
-            }
-
-            rs.close();
-            stmt.close();
-        } catch (SQLException err) {
-            System.out.println(err);
-        }
-        return ticketStatus;
     }
 
     /**
@@ -143,134 +130,116 @@ public class DeliveryOrderModel {
     public void setNotes(String notes) {
         this.notes = notes;
     }
-    
-    public String getCustomerNameByTicketId(int ticketId) {
-        String customerName = null;
 
-        try {
-            String query = "SELECT c.name " +
-                           "FROM tickets t " +
-                           "JOIN customers c ON t.customer_id = c.id " +
-                           "WHERE t.id = ?";
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
 
-            PreparedStatement stmt = sql.prepareStatement(query);
-            stmt.setInt(1, ticketId);
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-            ResultSet rs = stmt.executeQuery();
+    /**
+     * @return the problem
+     */
+    public String getProblem() {
+        return problem;
+    }
 
-            if (rs.next()) {
-                customerName = rs.getString("name");
-            }
+    /**
+     * @param problem the problem to set
+     */
+    public void setProblem(String problem) {
+        this.problem = problem;
+    }
 
-            rs.close();
-            stmt.close();
-        } catch (SQLException err) {
-            System.out.println(err);
-        }
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
 
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * @return the customerName
+     */
+    public String getCustomerName() {
         return customerName;
     }
-    
-    public String getCustomerDescriptionByTicketId(int ticketId) {
-        String customerDesc = null;
 
-        try {
-            String query = "SELECT c.description " +
-                           "FROM tickets t " +
-                           "JOIN customers c ON t.customer_id = c.id " +
-                           "WHERE t.id = ?";
-
-            PreparedStatement stmt = sql.prepareStatement(query);
-            stmt.setInt(1, ticketId);
-
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                customerDesc = rs.getString("description");
-            }
-
-            rs.close();
-            stmt.close();
-        } catch (SQLException err) {
-            System.out.println(err);
-        }
-
-        return customerDesc;
-    }
-    
-    public String getEngineerNameByTicketId(int ticketId) {
-        String userName = null;
-
-        try {
-            String query = "SELECT u.name " +
-                           "FROM tickets t " +
-                           "JOIN users u ON t.user_id = u.id " +
-                           "WHERE t.id = ?";
-
-            PreparedStatement stmt = sql.prepareStatement(query);
-            stmt.setInt(1, ticketId);
-
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                userName = rs.getString("name");
-            }
-
-            rs.close();
-            stmt.close();
-        } catch (SQLException err) {
-            System.out.println(err);
-        }
-
-        return userName;
-    }
-    
-    public String getTicketProblemById(int ticketId) {
-        String ticketProblem = null;
-
-        try {
-            String query = "SELECT problem FROM tickets WHERE id = ?";
-
-            PreparedStatement stmt = sql.prepareStatement(query);
-            stmt.setInt(1, ticketId);
-
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                ticketProblem = rs.getString("problem");
-            }
-
-            rs.close();
-            stmt.close();
-        } catch (SQLException err) {
-            System.out.println(err);
-        }
-
-        return ticketProblem;
-    }
-    
-    public String getTicketDescriptionById(int ticketId) {
-        String ticketDescription = null;
-
-        try {
-            String query = "SELECT description FROM tickets WHERE id = ?";
-
-            PreparedStatement stmt = sql.prepareStatement(query);
-            stmt.setInt(1, ticketId);
-
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                ticketDescription = rs.getString("description");
-            }
-
-            rs.close();
-            stmt.close();
-        } catch (SQLException err) {
-            System.out.println(err);
-        }
-
-        return ticketDescription;
+    /**
+     * @param customerName the customerName to set
+     */
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
+    /**
+     * @return the customerDescription
+     */
+    public String getCustomerDescription() {
+        return customerDescription;
+    }
+
+    /**
+     * @param customerDescription the customerDescription to set
+     */
+    public void setCustomerDescription(String customerDescription) {
+        this.customerDescription = customerDescription;
+    }
+
+    /**
+     * @return the engineerName
+     */
+    public String getEngineerName() {
+        return engineerName;
+    }
+
+    /**
+     * @param engineerName the engineerName to set
+     */
+    public void setEngineerName(String engineerName) {
+        this.engineerName = engineerName;
+    }
+
+    /**
+     * @return the customerPhone
+     */
+    public String getCustomerPhone() {
+        return customerPhone;
+    }
+
+    /**
+     * @param customerPhone the customerPhone to set
+     */
+    public void setCustomerPhone(String customerPhone) {
+        this.customerPhone = customerPhone;
+    }
+
+    /**
+     * @return the customerAddress
+     */
+    public String getCustomerAddress() {
+        return customerAddress;
+    }
+
+    /**
+     * @param customerAddress the customerAddress to set
+     */
+    public void setCustomerAddress(String customerAddress) {
+        this.customerAddress = customerAddress;
+    }
 }
