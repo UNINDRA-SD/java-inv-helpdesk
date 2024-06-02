@@ -5,6 +5,7 @@
 package dao;
 
 import config.MysqlDB;
+import config.PostgresDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,24 +20,25 @@ import model.SummaryReportModel;
  */
 public class SummaryReportDAO {
     
-    Connection sql = MysqlDB.connection();
+//    Connection sql = MysqlDB.connection();
+    Connection sql = PostgresDB.connection();
     
     public List<SummaryReportModel> getSummaryReports() {
         List<SummaryReportModel> summaryReports = new ArrayList<>();
         String query = "SELECT "
-                     + "t.id AS ticket_id, "
-                     + "t.problem, "
-                     + "ar.action_taken, "
-                     + "a.id AS asset_id, "
-                     + "a.name AS asset_name, "
-                     + "da.qty AS asset_qty, "
-                     + "ds.notes AS settle_notes "
-                     + "FROM tickets t "
-                     + "JOIN delivery_orders do ON t.id = do.ticket_id "
-                     + "JOIN do_assets da ON do.id = da.delivery_order_id "
-                     + "JOIN assets a ON da.asset_id = a.id "
-                     + "JOIN do_settlements ds ON da.id = ds.do_asset_id "
-                     + "JOIN activity_reports ar ON ds.activity_report_id = ar.id";
+            + "t.id AS ticket_id, "
+            + "t.problem, "
+            + "ar.action_taken, "
+            + "a.id AS asset_id, "
+            + "a.name AS asset_name, "
+            + "da.qty AS asset_qty, "
+            + "ds.notes AS settle_notes "
+            + "FROM tickets t "
+            + "JOIN delivery_orders tdo ON t.id = tdo.ticket_id "
+            + "JOIN do_assets da ON tdo.id = da.delivery_order_id "
+            + "JOIN assets a ON da.asset_id = a.id "
+            + "JOIN do_settlements ds ON da.id = ds.do_asset_id "
+            + "JOIN activity_reports ar ON ds.activity_report_id = ar.id";
 
         try (PreparedStatement stmt = sql.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {

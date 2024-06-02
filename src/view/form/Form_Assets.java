@@ -295,6 +295,16 @@ public class Form_Assets extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     
+    public void hideIdColumn() {
+        // Gunakan nama variabel yang berbeda untuk jTableDOAssets
+        JTable table = getDataTable();
+
+        // Sembunyikan kolom ID (kolom pertama)
+        table.getColumnModel().getColumn(6).setMinWidth(0);
+        table.getColumnModel().getColumn(6).setMaxWidth(0);
+        table.getColumnModel().getColumn(6).setWidth(0);
+    }
+    
     private boolean isItemExist(JComboBox comboBox, String item) {
         for (int i = 0; i < comboBox.getItemCount(); i++) {
             if (comboBox.getItemAt(i).toString().equals(item)) {

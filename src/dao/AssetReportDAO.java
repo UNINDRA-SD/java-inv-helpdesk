@@ -5,6 +5,7 @@
 package dao;
 
 import config.MysqlDB;
+import config.PostgresDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,20 +18,21 @@ import model.AssetReportModel;
  * @author dandy
  */
 public class AssetReportDAO {
-    Connection sql = MysqlDB.connection();
+//    Connection sql = MysqlDB.connection();
+    Connection sql = PostgresDB.connection();
     
     public List<AssetReportModel> getAvailableStockSummary() {
         List<AssetReportModel> assetReports = new ArrayList<>();
         String query = "SELECT "
-                     + "a.brand_id, "
-                     + "a.category_id, "
-                     + "b.name AS brand_name, "
-                     + "c.name AS category_name, "
-                     + "SUM(a.qty) AS total "
-                     + "FROM assets a "
-                     + "JOIN brands b ON a.brand_id = b.id "
-                     + "JOIN categories c ON a.category_id = c.id "
-                     + "GROUP BY a.brand_id, a.category_id";
+            + "a.brand_id, "
+            + "a.category_id, "
+            + "MAX(b.name) AS brand_name, "
+            + "MAX(c.name) AS category_name, "
+            + "SUM(a.qty) AS total "
+            + "FROM assets a "
+            + "JOIN brands b ON a.brand_id = b.id "
+            + "JOIN categories c ON a.category_id = c.id "
+            + "GROUP BY a.brand_id, a.category_id";
 
         try (PreparedStatement stmt = sql.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {

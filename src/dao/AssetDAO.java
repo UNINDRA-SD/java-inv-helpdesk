@@ -5,6 +5,7 @@
 package dao;
 
 import config.MysqlDB;
+import config.PostgresDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +21,8 @@ import model.AssetModel;
  * @author dandy
  */
 public class AssetDAO {
-    Connection sql = MysqlDB.connection();
+//    Connection sql = MysqlDB.connection();
+    Connection sql = PostgresDB.connection();
     
     public List<AssetModel> getAssets() {
         
