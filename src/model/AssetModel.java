@@ -5,6 +5,7 @@
 package model;
 
 import config.MysqlDB;
+import config.PostgresDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,7 +27,8 @@ public class AssetModel {
     private String description;
     private int qty;
     
-    Connection sql = MysqlDB.connection();
+//    Connection sql = MysqlDB.connection();
+    Connection sql = PostgresDB.connection();
 
     /**
      * @return the id

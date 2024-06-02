@@ -7,6 +7,7 @@ package dao;
 
 import java.sql.Connection;
 import config.MysqlDB;
+import config.PostgresDB;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -27,7 +28,8 @@ import view.main.Home;
  * @author dandy
  */
 public class UserDAO {
-    Connection sql = MysqlDB.connection();
+//    Connection sql = MysqlDB.connection();
+    Connection sql = PostgresDB.connection();
     Home home;
     
     public UserDAO(Home home) {

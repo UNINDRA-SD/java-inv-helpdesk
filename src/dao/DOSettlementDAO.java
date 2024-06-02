@@ -5,6 +5,7 @@
 package dao;
 
 import config.MysqlDB;
+import config.PostgresDB;
 import model.DOSettlementModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,7 +16,8 @@ import java.sql.SQLException;
  * @author dandy
  */
 public class DOSettlementDAO {
-    Connection sql = MysqlDB.connection();
+//    Connection sql = MysqlDB.connection();
+    Connection sql = PostgresDB.connection();
     
     public DOSettlementModel getDOSettlementById(int id) {
         DOSettlementModel doSettlement = null;

@@ -5,6 +5,7 @@
 package dao;
 
 import config.MysqlDB;
+import config.PostgresDB;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
@@ -21,7 +22,8 @@ import view.main.Home;
  * @author dandy
  */
 public class ActivityReportDAO {
-    Connection sql = MysqlDB.connection();
+//    Connection sql = MysqlDB.connection();
+    Connection sql = PostgresDB.connection();
     Home home;
     
     public ActivityReportDAO(Home home) {

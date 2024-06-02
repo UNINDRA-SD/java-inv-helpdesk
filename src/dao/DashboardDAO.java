@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import config.MysqlDB;
+import config.PostgresDB;
 import java.util.ArrayList;
 import java.util.List;
 import model.DashboardModel;
@@ -18,7 +19,8 @@ import model.DashboardModel;
  * @author dandy
  */
 public class DashboardDAO {
-    Connection sql = MysqlDB.connection();
+//    Connection sql = MysqlDB.connection();
+    Connection sql = PostgresDB.connection();
     
     public List<DashboardModel> getDashboardData() {
         List<DashboardModel> dashboardData = new ArrayList<>();

@@ -5,6 +5,7 @@
 package model;
 
 import config.MysqlDB;
+import config.PostgresDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +21,8 @@ public class DeliveryOrderModel {
     private int userId; //warehouse tim
     private String notes;
     
-    Connection sql = MysqlDB.connection();
+//    Connection sql = MysqlDB.connection();
+    Connection sql = PostgresDB.connection();
     
     private String status;
     private String problem;

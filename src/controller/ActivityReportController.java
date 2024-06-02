@@ -128,8 +128,6 @@ public class ActivityReportController {
                 float twoCol150 = twoCol + 150f;
                 float twoColumnWidth[] = {twoCol150, twoCol};
                 float threeCol = 190f;
-                float threeColumnWidth[] = {threeCol, threeCol, threeCol};
-                float fiveColumnWidth[] = {94f, 129f, 129f, 129f, 89f};
                 float fullwidth[] = {threeCol*3};
                 Paragraph oneSp = new Paragraph("\n");
                 

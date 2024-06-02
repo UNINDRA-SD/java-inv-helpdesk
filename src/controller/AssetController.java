@@ -31,6 +31,7 @@ public class AssetController {
         assets = assetDAO.getAssets();
         AssetTable assetTable = new AssetTable(assets);
         formAssets.getDataTable().setModel(assetTable);
+        formAssets.hideIdColumn();
     }
     
     public void saveAsset(Frame_CreateAsset createAssetView) {
