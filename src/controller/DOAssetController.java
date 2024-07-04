@@ -24,7 +24,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import java.sql.SQLException;
 import java.sql.Connection;
-import config.MysqlDB;
+import config.PostgresDB;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import model.AssetModel;
@@ -63,7 +63,7 @@ public class DOAssetController {
     public void saveDOAsset(Frame_AddDOAsset addDOAssetView) {
         Connection connection = null;
         try {
-            connection = MysqlDB.connection();
+            connection = PostgresDB.connection();
             connection.setAutoCommit(false); // Mulai transaksi
 
             // Pastikan input tidak kosong
@@ -132,7 +132,7 @@ public class DOAssetController {
     public void deleteDOAsset(String id, int assetId, int qty, Frame_DetailDeliveryOrder deliveryOrderView) {
         Connection connection = null;
         try {
-            connection = MysqlDB.connection();
+            connection = PostgresDB.connection();
             connection.setAutoCommit(false); // Mulai transaksi
 
             // Tambahkan kembali kuantitas ke aset
