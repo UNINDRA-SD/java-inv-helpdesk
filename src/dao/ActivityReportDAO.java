@@ -145,8 +145,8 @@ public class ActivityReportDAO {
                            "c.name AS customer_name, c.phone AS customer_phone, " +
                            "c.description AS customer_description, c.address AS customer_address " +
                            "FROM activity_reports ar " +
-                           "JOIN delivery_orders do ON ar.delivery_order_id = do.id " +
-                           "JOIN tickets t ON do.ticket_id = t.id " +
+                           "JOIN delivery_orders dos ON ar.delivery_order_id = dos.id " +
+                           "JOIN tickets t ON dos.ticket_id = t.id " +
                            "JOIN users u ON t.user_id = u.id " +
                            "JOIN customers c ON t.customer_id = c.id " +
                            "WHERE ar.id = ?";
