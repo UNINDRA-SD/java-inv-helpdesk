@@ -26,7 +26,7 @@ public class DashboardDAO {
         List<DashboardModel> dashboardData = new ArrayList<>();
         String query = "SELECT t.id AS ticket_id, c.name AS customer_name, c.phone AS customer_phone, " +
                        "c.address AS customer_address, u.name AS user_name, t.problem, t.status, " +
-                       "(SELECT id FROM delivery_orders WHERE ticket_id = t.id) AS do_id " +
+                       "(SELECT id FROM delivery_orders WHERE ticket_id = t.id LIMIT 1) AS do_id " +
                        "FROM tickets t " +
                        "JOIN customers c ON t.customer_id = c.id " +
                        "JOIN users u ON t.user_id = u.id";

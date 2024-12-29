@@ -19,8 +19,8 @@ public class PostgresDB {
             dataSource.setServerName("aws-0-ap-southeast-1.pooler.supabase.com");
             dataSource.setPortNumber(5432);
             dataSource.setDatabaseName("postgres");
-            dataSource.setUser("postgres.ganqkqdxzzfrftjfauep");  // Ganti dengan username PostgreSQL Anda
-            dataSource.setPassword("unindra-s6d");  // Ganti dengan password PostgreSQL Anda
+            dataSource.setUser("postgres.ungrigzxcktkoirwwgjy");  // Ganti dengan username PostgreSQL Anda
+            dataSource.setPassword("unindra-kkp-s7d");  // Ganti dengan password PostgreSQL Anda
             
             try {
                 con = dataSource.getConnection();

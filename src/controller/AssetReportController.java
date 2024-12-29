@@ -76,7 +76,7 @@ public class AssetReportController {
                 Paragraph oneSp = new Paragraph("\n");
                 
                 Table tableLetterHead = new Table(threeColumnWidth);
-                tableLetterHead.addCell(new Cell().add(new Paragraph("Summary Report").setFontSize(20f).setBold()).setBorder(Border.NO_BORDER));
+                tableLetterHead.addCell(new Cell().add(new Paragraph("Assets Report").setFontSize(20f).setBold()).setBorder(Border.NO_BORDER));
                 tableLetterHead.addCell(new Cell().add(new Paragraph("").setFontSize(20f).setBold()).setBorder(Border.NO_BORDER));
                 
                 Table tableLetterHeadInside = new Table(new float[]{twoCol / 2, twoCol / 2});
